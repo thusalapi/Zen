@@ -1,14 +1,9 @@
-import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function HomeScreen() {
-  const router = useRouter();
-
+export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Home Screen</Text>
-      <Button title="Go to Sign In" onPress={() => router.push("/signin")} />
+      <Text style={styles.title}>Home Tab</Text>
     </View>
   );
 }
@@ -16,10 +11,11 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
-  text: {
-    fontSize: 24,
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
