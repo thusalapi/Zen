@@ -1,29 +1,49 @@
-import { Tabs } from "expo-router";
-import { Feather } from "@expo/vector-icons";
+import { Tabs } from 'expo-router';
+import { Feather } from '@expo/vector-icons';
 
 export default function TabLayout() {
   return (
-    <Tabs
+    <Tabs 
       screenOptions={{
-        tabBarActiveTintColor: "#6C5CE7",
+        tabBarActiveTintColor: '#6B4EFF',
+        tabBarInactiveTintColor: '#666',
+        tabBarStyle: {
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+          backgroundColor: '#FFFFFF',
+          borderTopWidth: 0,
+          elevation: 0,
+          shadowOpacity: 0,
+        }
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <Feather name="home" size={24} color={color} />
-          ),
+          title: 'Journal',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Feather name="home" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="signin"
+        name="tasks"
         options={{
-          title: "Sign In",
-          tabBarIcon: ({ color }) => (
-            <Feather name="user" size={24} color={color} />
-          ),
+          title: 'Tasks',
+          tabBarIcon: ({ color }) => <Feather name="check-square" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="cards"
+        options={{
+          title: 'Cards',
+          tabBarIcon: ({ color }) => <Feather name="credit-card" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="more"
+        options={{
+          title: 'More',
+          tabBarIcon: ({ color }) => <Feather name="plus" size={24} color={color} />,
         }}
       />
     </Tabs>
