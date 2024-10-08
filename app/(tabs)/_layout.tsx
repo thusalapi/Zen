@@ -104,7 +104,6 @@ export default function TabLayout() {
             ),
           }}
         />
-        in
       </Tabs>
     </>
   );
