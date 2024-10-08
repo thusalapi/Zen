@@ -1,18 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { router } from "expo-router";
-import DoctorsList from "@/components/professional/DoctorsList";
 import AllDoctorsScreen from "@/components/professional/AllDoctorsScreen";
 
-export default function DoctorsScreen() {
-  return (
-    <View style={styles.container}>
-      <DoctorsList onNavigateBack={() => router.back()} />
-    </View>
-  );
-}
-
-export function AllDoctors() {
+export default function AllDoctors() {
   return (
     <View style={styles.container}>
       <AllDoctorsScreen navigation={{ goBack: () => router.back() }} />
