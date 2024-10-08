@@ -66,7 +66,6 @@ export default function TabLayout() {
           }}
         />
 
-        {/* Hidden tabs, accessible via URL */}
         <Tabs.Screen
           name="alldoctors"
           options={{
