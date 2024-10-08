@@ -1,9 +1,10 @@
-import { Tabs } from 'expo-router';
+import { Stack, Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
+import FeelingSelector from '@/components/FeelingSelector';
 
 export default function TabLayout() {
   return (
-    <Tabs 
+    <><Tabs
       screenOptions={{
         tabBarActiveTintColor: '#6B4EFF',
         tabBarInactiveTintColor: '#666',
@@ -23,29 +24,25 @@ export default function TabLayout() {
           title: 'Journal',
           headerShown: false,
           tabBarIcon: ({ color }) => <Feather name="home" size={24} color={color} />,
-        }}
-      />
+        }} />
       <Tabs.Screen
         name="tasks"
         options={{
           title: 'Tasks',
           tabBarIcon: ({ color }) => <Feather name="check-square" size={24} color={color} />,
-        }}
-      />
+        }} />
       <Tabs.Screen
         name="cards"
         options={{
           title: 'Cards',
           tabBarIcon: ({ color }) => <Feather name="credit-card" size={24} color={color} />,
-        }}
-      />
+        }} />
       <Tabs.Screen
         name="more"
         options={{
           title: 'More',
           tabBarIcon: ({ color }) => <Feather name="plus" size={24} color={color} />,
-        }}
-      />
-    </Tabs>
+        }} />
+    </Tabs></>
   );
 }

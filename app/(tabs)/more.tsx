@@ -1,22 +1,24 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+import FeelingSelector from '../../components/FeelingSelector';
 
-export default function TasksScreen() {
+export default function MoreScreen() {
+  const handleFeelingSubmit = (feeling: string, details: string) => {
+    console.log('Selected feeling:', feeling);
+    console.log('Additional details:', details);
+    // Handle the submission here
+  };
+
+  const handleBack = () => {
+    // Handle back navigation here
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Tasks Screen</Text>
+    <View style={{ flex: 1 }}>
+      <FeelingSelector 
+        onSubmit={handleFeelingSubmit}
+        onBack={handleBack}
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
