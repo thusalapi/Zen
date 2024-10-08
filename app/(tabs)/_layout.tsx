@@ -26,6 +26,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="habit"
+        options={{
+          title: "Habit",
+          tabBarIcon: ({ color }) => (
+            <Feather name="user" size={24} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
