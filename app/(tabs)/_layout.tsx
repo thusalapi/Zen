@@ -57,7 +57,7 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-                    name="doctors"
+          name="doctors"
           options={{
             title: "Doctors",
             tabBarIcon: ({ color }) => (
@@ -65,7 +65,6 @@ export default function TabLayout() {
             ),
           }}
         />
-
         <Tabs.Screen
           name="alldoctors"
           options={{
@@ -97,7 +96,6 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="history"
           name="habit"
           options={{
             title: "Habit",
@@ -105,7 +103,8 @@ export default function TabLayout() {
               <Feather name="plus" size={24} color={color} />
             ),
           }}
-        />in
+        />
+        in
       </Tabs>
     </>
   );
