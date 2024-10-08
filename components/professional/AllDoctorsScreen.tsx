@@ -5,14 +5,25 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  ListRenderItem,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import DoctorCard from "./DoctorCard";
 
-const filterOptions = ["All", "Exp", "Rating", "Price"];
+const filterOptions = ["All", "Exp", "Rating", "Price"] as const;
+type FilterOption = (typeof filterOptions)[number];
 
-const mockDoctors = [
+interface Doctor {
+  id: string;
+  name: string;
+  specialization: string;
+  hospital: string;
+  rating: number;
+  reviewCount: number;
+}
+
+const mockDoctors: Doctor[] = [
   {
     id: "1",
     name: "Dr. Avishka Senaretha",
@@ -22,7 +33,7 @@ const mockDoctors = [
     reviewCount: 1000,
   },
   {
-    id: "2",
+    id: "1",
     name: "Dr. Avishka Senaretha",
     specialization: "Clinical Psychologist",
     hospital: "Hemas",
@@ -30,7 +41,7 @@ const mockDoctors = [
     reviewCount: 1000,
   },
   {
-    id: "3",
+    id: "1",
     name: "Dr. Avishka Senaretha",
     specialization: "Clinical Psychologist",
     hospital: "Hemas",
@@ -38,7 +49,7 @@ const mockDoctors = [
     reviewCount: 1000,
   },
   {
-    id: "4",
+    id: "1",
     name: "Dr. Avishka Senaretha",
     specialization: "Clinical Psychologist",
     hospital: "Hemas",
@@ -46,7 +57,23 @@ const mockDoctors = [
     reviewCount: 1000,
   },
   {
-    id: "5",
+    id: "1",
+    name: "Dr. Avishka Senaretha",
+    specialization: "Clinical Psychologist",
+    hospital: "Hemas",
+    rating: 4.9,
+    reviewCount: 1000,
+  },
+  {
+    id: "1",
+    name: "Dr. Avishka Senaretha",
+    specialization: "Clinical Psychologist",
+    hospital: "Hemas",
+    rating: 4.9,
+    reviewCount: 1000,
+  },
+  {
+    id: "1",
     name: "Dr. Avishka Senaretha",
     specialization: "Clinical Psychologist",
     hospital: "Hemas",
@@ -55,13 +82,22 @@ const mockDoctors = [
   },
 ];
 
-const AllDoctorsScreen = ({ navigation }) => {
-  const [activeFilter, setActiveFilter] = useState("All");
-
-  const handleFilter = (filter) => {
-    setActiveFilter(filter);
-    // Implement filtering logic here
+interface AllDoctorsScreenProps {
+  navigation: {
+    goBack: () => void;
   };
+}
+
+const AllDoctorsScreen: React.FC<AllDoctorsScreenProps> = ({ navigation }) => {
+  const [activeFilter, setActiveFilter] = useState<FilterOption>("All");
+
+  const handleFilter = (filter: FilterOption) => {
+    setActiveFilter(filter);
+  };
+
+  const renderDoctorCard: ListRenderItem<Doctor> = ({ item }) => (
+    <DoctorCard doctor={item} />
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -100,7 +136,7 @@ const AllDoctorsScreen = ({ navigation }) => {
       </View>
       <FlatList
         data={mockDoctors}
-        renderItem={({ item }) => <DoctorCard doctor={item} />}
+        renderItem={renderDoctorCard}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
       />
@@ -120,7 +156,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
-    fontSize: 20,
+    fontSize: 32,
     fontWeight: "bold",
   },
   filterContainer: {

@@ -57,6 +57,45 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
+          name="doctors"
+          options={{
+            title: "Doctors",
+            tabBarIcon: ({ color }) => (
+              <Feather name="users" size={24} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="alldoctors"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="appointment"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="doctorDetails"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="feedback"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="history"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
           name="habit"
           options={{
             title: "Habit",
