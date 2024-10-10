@@ -73,7 +73,7 @@ const HistoryScreen: React.FC = () => {
           <Text style={styles.overviewNumber}>10</Text>
           <Text style={styles.overviewLabel}>Done</Text>
         </View>
-        <View style={styles.overviewItem}>
+        <View style={styles.upcoming}>
           <Text style={styles.overviewNumber}>3</Text>
           <Text style={styles.overviewLabel}>Upcoming</Text>
         </View>
@@ -154,7 +154,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   overviewItem: {
-    backgroundColor: "#E0E0E0",
+    backgroundColor: "#B4DADA",
+    borderRadius: 10,
+    padding: 20,
+    flex: 1,
+    marginHorizontal: 5,
+    alignItems: "center",
+  },
+  upcoming: {
+    backgroundColor: "#CDD2F6",
     borderRadius: 10,
     padding: 20,
     flex: 1,
