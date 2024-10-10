@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 16,
+    marginTop: 32,
   },
   loadingContainer: {
     flex: 1,

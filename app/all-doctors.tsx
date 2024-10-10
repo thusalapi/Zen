@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 32,
     padding: 16,
   },
   title: {
@@ -80,7 +81,8 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     paddingHorizontal: 16,
-    marginBottom: 16,
+    marginBottom: 24,
+    marginTop: 8,
   },
   cardList: {
     margin: 4,
