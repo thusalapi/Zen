@@ -92,7 +92,7 @@ const CreateNewHabitForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/habits",
+        "http://192.168.34.187:3000/api/habits",
         formData
       );
       console.log(response.data); // Handle success response
