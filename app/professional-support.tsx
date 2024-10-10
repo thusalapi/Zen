@@ -19,7 +19,9 @@ export default function ProfessionalSupport() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Let's Find Your Doctor</Text>
+      <Text style={styles.minititle}>Hi Patient</Text>
+      <Text style={styles.title}>Let's Find</Text>
+      <Text style={styles.title2}>Your Doctor</Text>
       <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
       <ViewAllHeader title="Recommended" />
       <DoctorList doctors={filteredDoctors} />
@@ -34,8 +36,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#F7F4F2",
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
+    fontWeight: "bold",
+  },
+  title2: {
+    fontSize: 32,
     fontWeight: "bold",
     marginBottom: 20,
+  },
+  minititle: {
+    fontSize: 24,
+    fontWeight: "light",
   },
 });

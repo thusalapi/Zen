@@ -18,6 +18,7 @@ export default function DoctorCard({ doctor }: Props) {
       <Image source={doctor.image} style={styles.image} />
       <View style={styles.info}>
         <Text style={styles.name}>{doctor.name}</Text>
+        <View style={styles.horizontalLine} />
         <Text style={styles.specialty}>{doctor.specialty}</Text>
         <Text style={styles.rating}>
           ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
@@ -28,11 +29,17 @@ export default function DoctorCard({ doctor }: Props) {
 }
 
 const styles = StyleSheet.create({
+  horizontalLine: {
+    borderBottomColor: "#000",
+    borderBottomWidth: 1,
+    marginVertical: 8,
+    width: "75%",
+  },
   card: {
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
-    padding: 10,
+    padding: 20,
     marginBottom: 10,
   },
   image: {
@@ -41,7 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   info: {
-    marginLeft: 10,
+    marginLeft: 30,
     flex: 1,
   },
   name: {
@@ -54,5 +61,6 @@ const styles = StyleSheet.create({
   },
   rating: {
     fontSize: 14,
+    marginTop: 8,
   },
 });

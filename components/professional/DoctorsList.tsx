@@ -4,7 +4,7 @@ import DoctorCard from "./DoctorCard";
 import { Doctor } from "@/types/Doctor";
 
 type Props = {
-  doctors: Doctor[];
+  doctors?: Doctor[];
 };
 
 export default function DoctorList({ doctors }: Props) {
