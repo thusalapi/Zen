@@ -12,6 +12,7 @@ import {
 import { Calendar } from "react-native-calendars";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/FontAwesome";
+import axios from "axios";
 
 const CreateNewHabitForm = () => {
   const [habitName, setHabitName] = useState("Study Art");
@@ -26,11 +27,16 @@ const CreateNewHabitForm = () => {
   const [reminderTime, setReminderTime] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+  const [habitType, setHabitType] = useState("Regular"); // Added state for habit type
+  const [dateRange, setDateRange] = useState({
+    start: "",
+    end: "",
+  }); // Added state for date range
 
   const icons = ["moon", "tint", "align-center", "user", "running"];
   const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
-  const toggleDay = (day:any) => {
+  const toggleDay = (day: any) => {
     if (selectedDays.includes(day)) {
       setSelectedDays(selectedDays.filter((d) => d !== day));
     } else {
@@ -40,21 +46,32 @@ const CreateNewHabitForm = () => {
 
   const showDatePicker = () => setDatePickerVisibility(true);
   const hideDatePicker = () => setDatePickerVisibility(false);
-  const handleConfirmDate = (date:any) => {
+  const handleConfirmDate = (date: any) => {
     setEndDate(date.toDateString());
     hideDatePicker();
   };
 
   const showTimePicker = () => setTimePickerVisibility(true);
   const hideTimePicker = () => setTimePickerVisibility(false);
-  const handleConfirmTime = (time:any) => {
+  const handleConfirmTime = (time: any) => {
     setReminderTime(
       time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
     );
     hideTimePicker();
   };
 
-  const handleSubmit = () => {
+  const handleDayPress = (day: any) => {
+    if (!dateRange.start) {
+      setDateRange({ start: day.dateString, end: "" });
+    } else if (!dateRange.end) {
+      setDateRange((prev) => ({ ...prev, end: day.dateString }));
+    } else {
+      setDateRange({ start: day.dateString, end: "" });
+    }
+  };
+
+  // Assuming handleSubmit already collects formData including userId
+  const handleSubmit = async () => {
     const formData = {
       habitName,
       selectedIcon,
@@ -66,9 +83,20 @@ const CreateNewHabitForm = () => {
       endDate,
       reminder,
       reminderTime,
+      habitType,
+      dateRange,
+      userId: "USER_ID", // Replace with actual user ID from your app's auth system
     };
-    console.log(formData);
-    // Here you can send the formData to your submit function
+
+    try {
+      const response = await axios.post(
+        "http://<your-server-url>/api/habits",
+        formData
+      );
+      console.log(response.data); // Handle success response
+    } catch (error) {
+      console.error("Error submitting habit form:", error);
+    }
   };
 
   return (
@@ -82,11 +110,23 @@ const CreateNewHabitForm = () => {
         </View>
 
         <View style={styles.habitTypeContainer}>
-          <TouchableOpacity style={styles.habitTypeButton}>
+          <TouchableOpacity
+            style={[
+              styles.habitTypeButton,
+              habitType === "Regular" && styles.selectedHabitType,
+            ]}
+            onPress={() => setHabitType("Regular")}
+          >
             <Text style={styles.habitTypeText}>Regular habit</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.habitTypeButton}>
-            <Text style={styles.habitTypeText}>Regular habit</Text>
+          <TouchableOpacity
+            style={[
+              styles.habitTypeButton,
+              habitType === "Irregular" && styles.selectedHabitType,
+            ]}
+            onPress={() => setHabitType("Irregular")}
+          >
+            <Text style={styles.habitTypeText}>Irregular habit</Text>
           </TouchableOpacity>
         </View>
 
@@ -145,6 +185,7 @@ const CreateNewHabitForm = () => {
         {repeatType === "Daily" && (
           <Calendar
             style={styles.calendar}
+            onDayPress={handleDayPress} // Added onDayPress to capture date
             theme={{
               backgroundColor: "#ffffff",
               calendarBackground: "#ffffff",
@@ -155,6 +196,21 @@ const CreateNewHabitForm = () => {
               dayTextColor: "#2d4150",
               textDisabledColor: "#d9e1e8",
             }}
+            markedDates={{
+              [dateRange.start]: {
+                selected: true,
+                startingDay: true,
+                color: "#3498db",
+                textColor: "white",
+              },
+              [dateRange.end]: {
+                selected: true,
+                endingDay: true,
+                color: "#3498db",
+                textColor: "white",
+              },
+            }}
+            markingType="period"
           />
         )}
 
@@ -333,6 +389,9 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
+  },
+  selectedHabitType: {
+    backgroundColor: "#8B4513", // Change color when selected
   },
   header: {
     flexDirection: "row",
