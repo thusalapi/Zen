@@ -20,5 +20,9 @@ app.use("/api/habits", habits);
 
 app.use("/api/users", users);
 
+app.use('/api/doctors', require('./routes/doctors'));
+app.use('/api/appointments', require('./routes/appointments'));
+app.use('/api/feedback', require('./routes/feedback'));
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
