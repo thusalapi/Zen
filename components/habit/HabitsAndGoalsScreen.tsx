@@ -11,13 +11,15 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import axios from "axios";
 
-const HabitsAndGoalsScreen = () => {
+const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [selectedHabits, setSelectedHabits] = useState<{
     [key: number]: boolean;
   }>({});
-  const [habits, setHabits] = useState<{ _id: string; name: string; duration: string }[]>([]);
+  const [habits, setHabits] = useState<
+    { _id: string; name: string; duration: string }[]
+  >([]);
 
   // const habits = [
   //   { id: 1, name: "Be healthy", duration: "2 month" },
@@ -58,7 +60,10 @@ const HabitsAndGoalsScreen = () => {
       <Text style={styles.habitText}>{habit.habitName}</Text>
       <View style={styles.habitRight}>
         <Text style={styles.habitDuration}>
-          {(new Date(habit.dateRange.end).getTime() - new Date(habit.dateRange.start).getTime()) / (1000 * 60 * 60 * 24)} days
+          {(new Date(habit.dateRange.end).getTime() -
+            new Date(habit.dateRange.start).getTime()) /
+            (1000 * 60 * 60 * 24)}{" "}
+          days
         </Text>
         <Icon name="chevron-right" size={24} color="#FFFFFF" />
       </View>
@@ -128,7 +133,10 @@ const HabitsAndGoalsScreen = () => {
           ))}
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("habitform")}
+        style={styles.addButton}
+      >
         <Icon name="plus" size={30} color="#FFFFFF" />
       </TouchableOpacity>
 
