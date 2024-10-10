@@ -19,8 +19,9 @@ export default function SearchBar({ value, onChangeText }: Props) {
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
+    height: 60,
     borderColor: "gray",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
     borderRadius: 20,
     paddingHorizontal: 15,
