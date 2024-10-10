@@ -55,10 +55,16 @@ const ExercisePage: React.FC<DeepBreathingExerciseProps> = ({
           <Text style={styles.duration}>Duration - 20 minutes</Text>
 
           <Text style={styles.description}>
-            Take slow, deep breaths by inhaling deeply through your nose,
-            filling your lungs, and exhaling gently through your mouth. This
-            mindful breathing technique calms your nervous system, and brings
-            your focus back to the present.
+            Deep breathing exercises are a powerful tool to help calm the mind
+            and relax the body. To practice, start by sitting or lying down in a
+            comfortable position. Close your eyes and take a slow, deep breath
+            in through your nose, allowing the air to fill your lungs
+            completely.
+          </Text>
+          <Text style={styles.description}>
+            With each breath, feel a sense of calm wash over you, as your heart
+            rate slows, your muscles relax, and your mind clears, leaving you
+            refreshed and centered.
           </Text>
 
           <TouchableOpacity
@@ -76,11 +82,11 @@ const ExercisePage: React.FC<DeepBreathingExerciseProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
-    marginHorizontal: 15,
+    backgroundColor: "#f1f1f1",
   },
   scrollContent: {
     flexGrow: 1,
+    marginHorizontal: 15,
   },
   header: {
     flexDirection: "row",
@@ -109,19 +115,19 @@ const styles = StyleSheet.create({
   },
   duration: {
     fontFamily: "Sora_600SemiBold",
-    fontSize: 18,
+    fontSize: 24,
     marginBottom: 16,
   },
   description: {
     fontFamily: "Sora_400Regular",
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 24,
     marginBottom: 24,
   },
   tutorialButton: {
     backgroundColor: "#FFFFFF",
     paddingVertical: 12,
-    paddingHorizontal: 84,
+    width: "100%",
     borderRadius: 15,
     alignItems: "center",
     alignSelf: "center",
@@ -138,7 +144,7 @@ const styles = StyleSheet.create({
   },
   tutorialButtonText: {
     fontFamily: "Sora_600SemiBold",
-    fontSize: 16,
+    fontSize: 20,
     color: "#000000",
   },
 });

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
+
+import { useDoctors } from "../hooks/useDoctors";
 import SearchBar from "@/components/professional/SearchBar";
 import ViewAllHeader from "@/components/professional/ViewAllHeader";
 import DoctorList from "@/components/professional/DoctorsList";
-import { useDoctors } from "@/hooks/useDoctors";
 
 export default function ProfessionalSupport() {
   const [searchQuery, setSearchQuery] = useState("");

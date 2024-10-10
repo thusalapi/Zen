@@ -1,12 +1,15 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { router } from "expo-router";
-import GoalsPage from "@/components/habit/GoalsPage";
+import HabitPage from "@/components/habit/HabitPage";
+import HabitsAndGoalsScreen from "@/components/habit/HabitsAndGoalsScreen";
+import CreateNewHabitForm from "@/components/habit/CreateNewHabitForm";
+import RemindersScreen from "@/components/habit/ReminderScreen";
 
 export default function SigninScreen() {
   return (
     <>
-      <GoalsPage />
+      <HabitsAndGoalsScreen />
     </>
   );
 }
