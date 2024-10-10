@@ -63,6 +63,7 @@ export default function Appointment() {
           <Image source={doctor.image} style={styles.doctorImage} />
           <View style={styles.doctorInfo}>
             <Text style={styles.doctorName}>{doctor.name}</Text>
+            <View style={styles.horizontalLine} />
             <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
             <Text style={styles.doctorRating}>
               ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
@@ -143,18 +144,18 @@ const styles = StyleSheet.create({
   placeholder: {
     width: 24,
   },
+  horizontalLine: {
+    borderBottomColor: "#000",
+    borderBottomWidth: 1,
+    marginVertical: 8,
+    width: "75%",
+  },
   doctorCard: {
     flexDirection: "row",
-    backgroundColor: "#FFF",
+    backgroundColor: "#FFFFFF",
     borderRadius: 10,
-    padding: 16,
-    marginHorizontal: 16,
-    marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    padding: 20,
+    marginBottom: 10,
   },
   doctorImage: {
     width: 80,
@@ -162,11 +163,11 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   doctorInfo: {
-    marginLeft: 16,
+    marginLeft: 30,
     flex: 1,
   },
   doctorName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
   },
   doctorSpecialty: {
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
   },
   doctorRating: {
     fontSize: 14,
-    marginTop: 4,
+    marginTop: 8,
   },
   form: {
     padding: 16,
