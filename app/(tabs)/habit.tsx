@@ -1,14 +1,14 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { router } from "expo-router";
-import GoalsPage from "@/components/habit/GoalsPage";
 import HabitPage from "@/components/habit/HabitPage";
-import HabitCreationForm from "@/components/habit/HabitCreateForm";
+import HabitsAndGoalsScreen from "@/components/habit/HabitsAndGoalsScreen";
+import CreateNewHabitForm from "@/components/habit/CreateNewHabitForm";
 
 export default function SigninScreen() {
   return (
     <>
-      <HabitCreationForm />
+      <CreateNewHabitForm />
     </>
   );
 }
