@@ -45,7 +45,7 @@ export default function DoctorDetails() {
             name="arrow-back"
             size={24}
             color="black"
-            onPress={() => router.back()}
+            onPress={() => router.push(`/all-doctors`)}
           />
           <Text style={styles.title}>Doctor Details</Text>
           <View style={styles.placeholder} />
