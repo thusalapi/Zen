@@ -82,4 +82,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 16,
   },
+  cardList: {
+    margin: 4,
+  },
 });
