@@ -100,7 +100,7 @@ const SelfAssessmentHome: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#f1f1f1",
   },
   scrollContent: {
     padding: 20,
