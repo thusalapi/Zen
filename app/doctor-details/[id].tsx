@@ -15,9 +15,25 @@ import { useDoctors } from "@/hooks/useDoctors";
 export default function DoctorDetails() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
-  const { doctors } = useDoctors();
+  const { doctors, loading, error } = useDoctors();
 
   const doctor = doctors.find((d) => d.id === id);
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading doctors...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View>
+        <Text>Error: {error.message}</Text>
+      </View>
+    );
+  }
 
   if (!doctor) return <Text>Doctor not found</Text>;
 
@@ -29,7 +45,7 @@ export default function DoctorDetails() {
             name="arrow-back"
             size={24}
             color="black"
-            onPress={() => router.back()}
+            onPress={() => router.push(`/all-doctors`)}
           />
           <Text style={styles.title}>Doctor Details</Text>
           <View style={styles.placeholder} />

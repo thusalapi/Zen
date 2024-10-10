@@ -90,7 +90,11 @@ export default function TabLayout() {
         <Tabs.Screen
           name="habit"
           options={{
-           href: null,
+            headerShown: false,
+            title: "Habit",
+            tabBarIcon: ({ color }) => (
+              <Feather name="plus" size={24} color={color} />
+            ),
           }}
         />
       </Tabs>

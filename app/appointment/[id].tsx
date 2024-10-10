@@ -38,11 +38,9 @@ export default function Appointment() {
     };
 
     // TODO: Send appointmentData to your backend API
-    // For now, we'll just log it and navigate to the feedback page
     console.log("Appointment Data:", appointmentData);
 
-    // Navigate to the feedback page
-    router.push(`/feedback/${doctor.id}`);
+    router.push(`/history`);
   };
 
   return (
@@ -53,7 +51,7 @@ export default function Appointment() {
             name="arrow-back"
             size={24}
             color="black"
-            onPress={() => router.back()}
+            onPress={() => router.push(`/doctor-details/${doctor.id}`)}
           />
           <Text style={styles.title}>Appointment</Text>
           <View style={styles.placeholder} />
@@ -207,8 +205,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   notesInput: {
-    height: 100,
     textAlignVertical: "top",
+    // height: 300,
   },
   submitButton: {
     backgroundColor: "#D2B48C",
