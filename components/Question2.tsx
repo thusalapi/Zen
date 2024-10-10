@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   useFonts,
@@ -34,75 +40,85 @@ const Question2: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <LinearGradient colors={["#CDD2F6", "#E6E6FA"]} style={styles.gradient}>
-        <View style={styles.content}>
-          <View style={styles.progressContainer}>
-            {[1, 2, 3, 4, 5].map((num) => (
-              <View
-                key={num}
-                style={[
-                  styles.progressCircle,
-                  num === 2 && styles.activeProgressCircle,
-                  num === 1 && styles.completedProgressCircle,
-                ]}
-              >
-                {num === 2 && <Text style={styles.progressNumber}>2</Text>}
-              </View>
-            ))}
-          </View>
-
-          <Text style={styles.question}>
-            How well are you managing your daily responsibilities?
-          </Text>
-
-          {options.map((option) => (
-            <TouchableOpacity
-              key={option.id}
+      <ImageBackground
+        source={require("../assets/images/bg1.png")}
+        style={styles.imageBackground}
+        resizeMode="contain"
+      ></ImageBackground>
+      <View style={styles.content}>
+        <View style={styles.progressContainer}>
+          {[1, 2, 3, 4, 5].map((num) => (
+            <View
+              key={num}
               style={[
-                styles.optionButton,
-                selectedOption === option.id && styles.selectedOption,
+                styles.progressCircle,
+                num === 2 && styles.activeProgressCircle,
+                num === 1 && styles.completedProgressCircle,
               ]}
-              onPress={() => setSelectedOption(option.id)}
             >
-              <Text style={styles.optionText}>{option.text}</Text>
-            </TouchableOpacity>
+              {num === 2 && <Text style={styles.progressNumber}>2</Text>}
+            </View>
           ))}
-
-          <View style={styles.navigationContainer}>
-            <TouchableOpacity style={styles.navButton}>
-              <Text style={styles.navButtonText}>Back</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navButton}>
-              <Text style={styles.navButtonText}>Next</Text>
-            </TouchableOpacity>
-          </View>
         </View>
-      </LinearGradient>
+
+        <Text style={styles.question}>
+          How well are you managing your daily responsibilities?
+        </Text>
+
+        {options.map((option) => (
+          <TouchableOpacity
+            key={option.id}
+            style={[
+              styles.optionButton,
+              selectedOption === option.id && styles.selectedOption,
+            ]}
+            onPress={() => setSelectedOption(option.id)}
+          >
+            <Text style={styles.optionText}>{option.text}</Text>
+          </TouchableOpacity>
+        ))}
+
+        <View style={styles.navigationContainer}>
+          <TouchableOpacity style={styles.navButton}>
+            <Text style={styles.navButtonText}>Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navButton}>
+            <Text style={styles.navButtonText}>Next</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     fontFamily: "Sora",
+    backgroundColor: "#f1f1f1",
   },
-  gradient: {
-    flex: 1,
+  imageBackground: {
+    width: "100%",
+    height: "65.2%",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: 0,
+    left: 0,
   },
   content: {
     flex: 1,
     padding: 20,
-    justifyContent: "center",
   },
   progressContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 30,
+    marginBottom: 60,
+    marginTop: 80,
   },
   progressCircle: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: "#000",
@@ -114,26 +130,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   completedProgressCircle: {
-    backgroundColor: "#A5F243",
+    backgroundColor: "#CDD2F6",
   },
   progressNumber: {
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: "bold",
     fontFamily: "Sora_700Bold",
   },
   question: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 30,
+    marginBottom: 100,
     fontFamily: "Sora_700Bold",
   },
   optionButton: {
-    backgroundColor: "#CBE8A6",
-    padding: 15,
+    backgroundColor: "#fff",
+    padding: 20,
     borderRadius: 10,
-    marginBottom: 10,
-
+    marginBottom: 16,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -141,21 +156,20 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   selectedOption: {
-    backgroundColor: "#A5F243",
+    backgroundColor: "#CDD2F6",
   },
   optionText: {
-    fontSize: 16,
+    fontSize: 20,
     textAlign: "center",
     fontFamily: "Sora_400Regular",
   },
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 20,
+    marginTop: 80,
   },
   navButton: {
     padding: 10,
