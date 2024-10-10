@@ -49,9 +49,17 @@ export default function RootLayout() {
       value={colorScheme === "dark" ? DarkTheme : CustomLightTheme} // Use custom light theme
     >
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      
+        <Stack.Screen name="index" options={{ title: "Home" }} />
+        <Stack.Screen name="all-doctors" options={{ title: "All Doctors" }} />
+        <Stack.Screen
+          name="doctor-details/[id]"
+          options={{ title: "Doctor Details" }}
+        />
+        <Stack.Screen
+          name="appointment/[id]"
+          options={{ title: "Book Appointment" }}
+        />
+        <Stack.Screen name="feedback" options={{ title: "Feedback" }} />
       </Stack>
     </ThemeProvider>
   );
