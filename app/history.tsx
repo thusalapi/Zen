@@ -50,8 +50,6 @@ const HistoryScreen: React.FC = () => {
 
   const handleSubmit = () => {
     // TODO: Send feedback data to your backend
-    console.log("Feedback:", { doctorId: id, rating, comment });
-    // Navigate back to home or show a confirmation
     router.push("/history");
   };
 
@@ -65,14 +63,7 @@ const HistoryScreen: React.FC = () => {
           onPress={() => router.back()}
         />
         <Text style={styles.title}>History</Text>
-        <Ionicons
-          name="search"
-          size={24}
-          color="black"
-          onPress={() => {
-            /* Implement search */
-          }}
-        />
+        <View style={styles.placeholder} />
       </View>
 
       <Text style={styles.subtitle}>History Overview</Text>
@@ -122,7 +113,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F7F4F2",
-    padding: 20,
   },
   header: {
     flexDirection: "row",
@@ -148,9 +138,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20,
+    color: "#4A4A4A",
   },
   subtitle: {
     fontSize: 18,
@@ -177,6 +167,9 @@ const styles = StyleSheet.create({
   },
   overviewLabel: {
     fontSize: 16,
+  },
+  placeholder: {
+    width: 24,
   },
   appointmentsHeader: {
     flexDirection: "row",

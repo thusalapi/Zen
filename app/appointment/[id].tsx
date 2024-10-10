@@ -205,8 +205,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   notesInput: {
-    height: 100,
     textAlignVertical: "top",
+    // height: 300,
   },
   submitButton: {
     backgroundColor: "#D2B48C",
