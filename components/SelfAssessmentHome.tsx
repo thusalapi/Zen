@@ -54,12 +54,11 @@ const SelfAssessmentHome: React.FC = () => {
           <View style={styles.headerText}>
             <Text style={styles.title}>Understand Your Mind</Text>
             <Text style={styles.subtitle}>
-              Observe your thoughts and emotions without judgment to gain
-              clarity and calm.
+              Observe your thoughts and emotions.
             </Text>
           </View>
           <Image
-            source={require("../assets/images/brain.png")}
+            source={require("../assets/images/header.png")}
             style={styles.brainImage}
           />
         </View>
@@ -110,6 +109,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
+    backgroundColor: "#BC9680",
+    padding: 10,
+    borderRadius: 20,
   },
   headerText: {
     flex: 1,
@@ -123,18 +125,18 @@ const styles = StyleSheet.create({
   subtitle: {
     fontFamily: "Sora_400Regular",
     fontSize: 16,
-    color: "#666",
+    color: "#fff",
   },
   brainImage: {
-    width: 100,
-    height: 100,
+    width: 180,
+    height: 180,
     resizeMode: "contain",
   },
   assessmentButton: {
     paddingVertical: 15,
     alignItems: "center",
     marginBottom: 30,
-    backgroundColor: "#CBE8A6",
+    backgroundColor: "#4F3422",
     borderRadius: 20,
 
     shadowColor: "#000",
@@ -149,8 +151,8 @@ const styles = StyleSheet.create({
   },
   assessmentButtonText: {
     fontFamily: "Sora_600SemiBold",
-    fontSize: 18,
-    color: "#000000",
+    fontSize: 20,
+    color: "#fff",
   },
   sectionTitle: {
     fontFamily: "Sora_700Bold",
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
   },
   exerciseCard: {
     flexDirection: "row",
-    backgroundColor: "#E8C6B7",
+    backgroundColor: "#fff",
     borderRadius: 10,
     overflow: "hidden",
     marginBottom: 15,

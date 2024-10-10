@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -27,24 +28,27 @@ const QuizCompletion: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient colors={["#CDD2F6", "#E6E6FA"]} style={styles.gradient}>
-        <View style={styles.content}>
-          <View style={styles.imageContainer}>
-            <Image
-              source={require("../assets/images/tick.png")}
-              style={styles.tickImage}
-            />
-          </View>
-
-          <Text style={styles.completionText}>
-            You have completed the self assessment quiz!
-          </Text>
-
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>View Mind Exercises</Text>
-          </TouchableOpacity>
+      <View style={styles.content}>
+        <ImageBackground
+          source={require("../assets/images/bg1.png")}
+          style={styles.imageBackground}
+          resizeMode="contain"
+        ></ImageBackground>
+        <View style={styles.imageContainer}>
+          <Image
+            source={require("../assets/images/tick.png")}
+            style={styles.tickImage}
+          />
         </View>
-      </LinearGradient>
+
+        <Text style={styles.completionText}>
+          You have completed the self assessment quiz!
+        </Text>
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>View Mind Exercises</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -56,18 +60,27 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
   },
+  imageBackground: {
+    width: "100%",
+    height: "65.2%",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: 0,
+    left: 0,
+  },
   content: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
     padding: 20,
   },
   imageContainer: {
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 30,
+    marginTop: 160,
   },
   tickImage: {
     width: "100%",
@@ -78,12 +91,13 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontFamily: "Sora_700Bold",
     textAlign: "center",
-    marginBottom: 40,
+    marginBottom: 120,
+    marginTop: 40,
   },
   button: {
-    backgroundColor: "#CBE8A6",
-    paddingVertical: 15,
-    paddingHorizontal: 60,
+    backgroundColor: "#4F3422",
+    width: "100%",
+    padding: 20,
     borderRadius: 20,
 
     shadowColor: "#000",
@@ -98,8 +112,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontFamily: "Sora_400Regular",
-    fontSize: 18,
-    color: "#000000",
+    fontSize: 20,
+    color: "#fff",
     textAlign: "center",
   },
 });
