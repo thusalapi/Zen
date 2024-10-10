@@ -28,7 +28,7 @@ export default function Feedback() {
     // TODO: Send feedback data to your backend
     console.log("Feedback:", { doctorId: id, rating, comment });
     // Navigate back to home or show a confirmation
-    router.push("/");
+    router.push("/history");
   };
 
   return (
