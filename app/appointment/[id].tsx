@@ -51,7 +51,7 @@ export default function Appointment() {
             name="arrow-back"
             size={24}
             color="black"
-            onPress={() => router.back()}
+            onPress={() => router.push(`/doctor-details/${doctor.id}`)}
           />
           <Text style={styles.title}>Appointment</Text>
           <View style={styles.placeholder} />
