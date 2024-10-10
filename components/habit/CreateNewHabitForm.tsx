@@ -85,12 +85,14 @@ const CreateNewHabitForm = () => {
       reminderTime,
       habitType,
       dateRange,
-      userId: "USER_ID", // Replace with actual user ID from your app's auth system
+      userId: "6707bed530b32fa9c8952e00", // Replace with actual user ID from your app's auth system
     };
+
+    console.log("Submitting habit form:", formData);
 
     try {
       const response = await axios.post(
-        "http://<your-server-url>/api/habits",
+        "http://localhost:3000/api/habits",
         formData
       );
       console.log(response.data); // Handle success response

@@ -4,11 +4,12 @@ import { router } from "expo-router";
 import HabitPage from "@/components/habit/HabitPage";
 import HabitsAndGoalsScreen from "@/components/habit/HabitsAndGoalsScreen";
 import CreateNewHabitForm from "@/components/habit/CreateNewHabitForm";
+import RemindersScreen from "@/components/habit/ReminderScreen";
 
 export default function SigninScreen() {
   return (
     <>
-      <CreateNewHabitForm />
+      <HabitsAndGoalsScreen />
     </>
   );
 }

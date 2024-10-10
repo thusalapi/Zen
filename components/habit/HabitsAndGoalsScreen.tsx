@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,16 +9,38 @@ import {
   Modal,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import axios from "axios";
 
 const HabitsAndGoalsScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
-  const [selectedHabits, setSelectedHabits] = useState<{ [key: number]: boolean }>({});
+  const [selectedHabits, setSelectedHabits] = useState<{
+    [key: number]: boolean;
+  }>({});
+  const [habits, setHabits] = useState<{ _id: string; name: string; duration: string }[]>([]);
 
-  const habits = [
-    { id: 1, name: "Be healthy", duration: "2 month" },
-    { id: 2, name: "Be healthy", duration: "2 month" },
-  ];
+  // const habits = [
+  //   { id: 1, name: "Be healthy", duration: "2 month" },
+  //   { id: 2, name: "Be healthy", duration: "2 month" },
+  // ];
+
+  // Fetch habits from backend
+  useEffect(() => {
+    const fetchHabits = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/api/habits/6707bed530b32fa9c8952e00"
+        ); // Replace with your backend URL
+        setHabits(response.data); // Assuming data contains an array of habits
+      } catch (error) {
+        console.error("Error fetching habits:", error);
+      }
+    };
+
+    fetchHabits();
+  }, []);
+
+  console.log(habits);
 
   const goals = [
     { id: 1, name: "Be healthy", duration: "2 month", color: "#A8D8D8" },
@@ -31,17 +53,19 @@ const HabitsAndGoalsScreen = () => {
     { id: 2, name: "Drink water", frequency: "4/7 days" },
   ];
 
-  const renderHabitItem = (habit:any) => (
+  const renderHabitItem = (habit: any) => (
     <View style={styles.habitItem}>
-      <Text style={styles.habitText}>{habit.name}</Text>
+      <Text style={styles.habitText}>{habit.habitName}</Text>
       <View style={styles.habitRight}>
-        <Text style={styles.habitDuration}>{habit.duration}</Text>
+        <Text style={styles.habitDuration}>
+          {(new Date(habit.dateRange.end).getTime() - new Date(habit.dateRange.start).getTime()) / (1000 * 60 * 60 * 24)} days
+        </Text>
         <Icon name="chevron-right" size={24} color="#FFFFFF" />
       </View>
     </View>
   );
 
-  const renderGoalItem = (goal:any) => (
+  const renderGoalItem = (goal: any) => (
     <View style={[styles.goalItem, { backgroundColor: goal.color }]}>
       <View style={styles.goalTop}>
         <Text style={styles.goalText}>{goal.name}</Text>
@@ -71,7 +95,7 @@ const HabitsAndGoalsScreen = () => {
     </View>
   );
 
-  const toggleHabitSelection = (habitId:any) => {
+  const toggleHabitSelection = (habitId: any) => {
     setSelectedHabits((prev) => ({
       ...prev,
       [habitId]: !prev[habitId],
@@ -89,7 +113,7 @@ const HabitsAndGoalsScreen = () => {
             </TouchableOpacity>
           </View>
           {habits.map((habit) => (
-            <View key={habit.id}>{renderHabitItem(habit)}</View>
+            <View key={habit._id}>{renderHabitItem(habit)}</View>
           ))}
         </View>
         <View style={styles.section}>
