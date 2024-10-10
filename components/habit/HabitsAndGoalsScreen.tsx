@@ -113,7 +113,7 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Habits</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("allhabit")}>
               <Text style={styles.viewAllText}>View all→</Text>
             </TouchableOpacity>
           </View>
