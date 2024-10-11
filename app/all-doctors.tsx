@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  Platform,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useDoctors } from "../hooks/useDoctors";
 import FilterButton from "@/components/professional/FilterButton";
 import DoctorList from "@/components/professional/DoctorsList";
 
-const filterOptions = ["All", "Exp", "Rating", "Price"];
+const filterOptions = ["All", "Exp", "Rating", "Price", "Specialty"];
 
 export default function AllDoctors() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -17,49 +24,56 @@ export default function AllDoctors() {
   if (error) return <Text>Error: {error.message}</Text>;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons
-          name="arrow-back"
-          size={24}
-          color="black"
-          onPress={() => router.push(`/(tabs)/doctors`)}
-        />
-        <Text style={styles.title}>Doctors</Text>
-        <Ionicons
-          name="search"
-          size={24}
-          color="black"
-          onPress={() => {
-            /* Implement search */
-          }}
-        />
-      </View>
-
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.filterContainer}
-      >
-        {filterOptions.map((option) => (
-          <FilterButton
-            key={option}
-            title={option}
-            isActive={activeFilter === option}
-            onPress={() => setActiveFilter(option)}
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Ionicons
+            name="arrow-back"
+            size={24}
+            color="black"
+            onPress={() => router.push(`/(tabs)/doctors`)}
           />
-        ))}
-      </ScrollView>
+          <Text style={styles.title}>Doctors</Text>
+          <Ionicons
+            name="search"
+            size={24}
+            color="black"
+            onPress={() => {
+              /* Implement search */
+            }}
+          />
+        </View>
 
-      <DoctorList doctors={doctors} />
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.filterContainer}
+        >
+          {filterOptions.map((option) => (
+            <FilterButton
+              key={option}
+              title={option}
+              isActive={activeFilter === option}
+              onPress={() => setActiveFilter(option)}
+            />
+          ))}
+        </ScrollView>
+
+        <DoctorList doctors={doctors} />
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#F7F4F2",
+  },
   container: {
     flex: 1,
     backgroundColor: "#F7F4F2",
+    paddingBottom: Platform.OS === "ios" ? 0 : 16,
   },
   header: {
     flexDirection: "row",

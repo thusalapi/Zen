@@ -13,6 +13,7 @@ export default function SearchBar({ value, onChangeText }: Props) {
       placeholder="Search your doctor"
       value={value}
       onChangeText={onChangeText}
+      placeholderTextColor="#000"
     />
   );
 }

@@ -62,5 +62,6 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 14,
     marginTop: 8,
+    color: "#EAC612",
   },
 });

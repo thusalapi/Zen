@@ -29,7 +29,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     marginRight: 8,
-    lineHeight: 32,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 40,
   },
   activeButton: {
     backgroundColor: "#8B4513",

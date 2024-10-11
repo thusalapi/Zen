@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
   doctorRating: {
     fontSize: 14,
     marginTop: 8,
+    color: "#EAC612",
   },
   section: {
     padding: 16,
