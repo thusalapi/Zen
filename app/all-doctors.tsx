@@ -49,12 +49,6 @@ export default function AllDoctors() {
             onPress={() => setActiveFilter(option)}
           />
         ))}
-        <FilterButton
-          title="⚙️"
-          onPress={() => {
-            /* Implement advanced filter */
-          }}
-        />
       </ScrollView>
 
       <DoctorList doctors={doctors} />

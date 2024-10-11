@@ -7,6 +7,9 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -33,49 +36,59 @@ export default function Feedback() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons
-          name="arrow-back"
-          size={24}
-          color="black"
-          onPress={() => router.back()}
-        />
-        <Text style={styles.title}>Feedback</Text>
-        <View style={styles.placeholder} />
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardAvoidingView}
+      >
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          <View style={styles.header}>
+            <Ionicons
+              name="arrow-back"
+              size={24}
+              color="black"
+              onPress={() => router.back()}
+            />
+            <Text style={styles.title}>Feedback</Text>
+            <View style={styles.placeholder} />
+          </View>
 
-      <View style={styles.doctorCard}>
-        <Image source={doctor.image} style={styles.doctorImage} />
-        <View style={styles.doctorInfo}>
-          <Text style={styles.doctorName}>{doctor.name}</Text>
-          <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
-          <Text style={styles.doctorRating}>
-            ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
-          </Text>
-        </View>
-      </View>
+          <View style={styles.doctorCard}>
+            <Image source={doctor.image} style={styles.doctorImage} />
+            <View style={styles.doctorInfo}>
+              <Text style={styles.doctorName}>{doctor.name}</Text>
+              <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
+              <Text style={styles.doctorRating}>
+                ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
+              </Text>
+            </View>
+          </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Why Rate?</Text>
-        <Text style={styles.description}>{doctor.about}</Text>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Why Rate?</Text>
+            <Text style={styles.description}>{doctor.about}</Text>
 
-        <Text style={styles.sectionTitle}>Your Ratings</Text>
-        <StarRating rating={rating} onRatingChange={setRating} />
+            <Text style={styles.sectionTitle}>Your Ratings</Text>
+            <StarRating rating={rating} onRatingChange={setRating} />
 
-        <Text style={styles.sectionTitle}>Your Comment</Text>
-        <TextInput
-          style={styles.commentInput}
-          multiline
-          numberOfLines={4}
-          value={comment}
-          onChangeText={setComment}
-          placeholder="Write your comment here..."
-        />
+            <Text style={styles.sectionTitle}>Your Comment</Text>
+            <TextInput
+              style={styles.commentInput}
+              multiline
+              numberOfLines={4}
+              value={comment}
+              onChangeText={setComment}
+              placeholder="Write your comment here..."
+            />
 
-        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-          <Text style={styles.submitButtonText}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={handleSubmit}
+            >
+              <Text style={styles.submitButtonText}>Submit</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -85,12 +98,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7F4F2",
   },
+  keyboardAvoidingView: {
+    flex: 1,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     padding: 16,
-    marginTop: 32,
     marginBottom: 16,
   },
   title: {
@@ -164,6 +182,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     alignItems: "center",
+    marginBottom: 20,
   },
   submitButtonText: {
     color: "#FFF",
