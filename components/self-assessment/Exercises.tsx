@@ -73,6 +73,7 @@ const ExerciseItem: React.FC<{ item: Exercise; onPress: () => void }> = ({
     <Image source={item.image} style={styles.exerciseImage} />
     <View style={styles.exerciseInfo}>
       <Text style={styles.exerciseTitle}>{item.title}</Text>
+      <View style={styles.horizontalLine} />
       <Text style={styles.exerciseDuration}>{item.duration}</Text>
     </View>
   </TouchableOpacity>
@@ -128,6 +129,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#f1f1f1",
     width: "100%",
   },
+  horizontalLine: {
+    borderBottomColor: "#000",
+    borderBottomWidth: 1,
+    marginVertical: 8,
+    width: "100%",
+  },
   scrollContent: {
     flexGrow: 1,
     marginHorizontal: 16,
@@ -167,6 +174,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderTopLeftRadius: 15,
     borderBottomLeftRadius: 15,
+    margin: 10,
   },
   exerciseInfo: {
     flex: 1,

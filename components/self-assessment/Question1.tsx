@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     width: "100%",
-    height: "65.2%",
+    height: "65%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: 60,
-    marginTop: 80,
+    marginTop: 40,
   },
   progressCircle: {
     width: 40,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     fontFamily: "Sora_700Bold",
   },
   question: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 100,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 80,
+    marginTop: 60,
   },
   navButton: {
     padding: 10,

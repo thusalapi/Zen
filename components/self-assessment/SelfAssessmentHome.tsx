@@ -49,6 +49,7 @@ const ExerciseCard: React.FC<ExerciseProps> = ({
     <Image source={imageSource} style={styles.exerciseImage} />
     <View style={styles.exerciseInfo}>
       <Text style={styles.exerciseTitle}>{title}</Text>
+      <View style={styles.horizontalLine} />
       <Text style={styles.exerciseDuration}>{duration}</Text>
     </View>
   </View>
@@ -158,18 +159,24 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "Sora_700Bold",
-    fontSize: 28,
+    fontSize: 26,
     marginBottom: 10,
   },
   subtitle: {
     fontFamily: "Sora_400Regular",
-    fontSize: 16,
+    fontSize: 14,
     color: "#fff",
   },
   brainImage: {
-    width: 160,
-    height: 160,
+    width: 150,
+    height: 150,
     resizeMode: "contain",
+  },
+  horizontalLine: {
+    borderBottomColor: "#000",
+    borderBottomWidth: 1,
+    marginVertical: 8,
+    width: "100%",
   },
   assessmentButton: {
     paddingVertical: 15,
@@ -219,6 +226,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     resizeMode: "cover",
+    margin: 10,
   },
   exerciseInfo: {
     flex: 1,
