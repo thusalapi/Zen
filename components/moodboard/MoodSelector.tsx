@@ -7,22 +7,25 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import Carousel from 'react-native-reanimated-carousel';
 
 interface MoodOption {
   id: number;
   image: any;
   backgroundColor: string;
 }
+const { width, height } = Dimensions.get('window');
+// iPhone 14 Pro dimensions
+const iPHONE_14_PRO_WIDTH = 393;
+const iPHONE_14_PRO_HEIGHT = 852;
 
-interface RenderItemProps {
-  item: MoodOption;
-  index: number;
-}
-
+// Scale factors for responsive design
+const widthScale = width / iPHONE_14_PRO_WIDTH;
+const heightScale = height / iPHONE_14_PRO_HEIGHT;
 const { width: screenWidth } = Dimensions.get('window');
 
 const MoodSelectorCarousel: React.FC = () => {
+    
   const [activeIndex, setActiveIndex] = useState(0);
 
   const moodOptions: MoodOption[] = [
@@ -48,11 +51,9 @@ const MoodSelectorCarousel: React.FC = () => {
     },
   ];
 
-  const renderMoodItem = ({ item, index }: RenderItemProps) => {
-    if (!item) return null;
-    
+  const renderMoodItem = (item: MoodOption) => {
     return (
-      <View key={index} style={[styles.slide, { backgroundColor: item.backgroundColor }]}>
+      <View style={[styles.slide, { backgroundColor: item.backgroundColor }]}>
         <Text style={styles.title}>Tell us how you{'\n'}are feeling{'\n'}today?</Text>
         <Image source={item.image} style={styles.moodImage} />
       </View>
@@ -61,17 +62,15 @@ const MoodSelectorCarousel: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {moodOptions.length > 0 && (
-        <Carousel
-          data={moodOptions}
-          renderItem={renderMoodItem}
-          sliderWidth={screenWidth}
-          itemWidth={screenWidth}
-          onSnapToItem={(index) => setActiveIndex(index)}
-          inactiveSlideScale={1}
-          inactiveSlideOpacity={1}
-        />
-      )}
+      <Carousel
+        loop={false}
+        width={screenWidth}
+        height={screenWidth * 1.5}
+        data={moodOptions}
+        scrollAnimationDuration={1000}
+        onSnapToItem={(index) => setActiveIndex(index)}
+        renderItem={({ item }) => renderMoodItem(item)}
+      />
       <Image 
         source={require('../../assets/images/brownvector.png')}
         style={styles.bottomVector}
@@ -98,12 +97,12 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: '600',
     color: '#5D4037',
-    textAlign: 'center',
+    textAlign: 'left',
     marginBottom: 20,
   },
   moodImage: {
-    width: '80%',
-    height: '60%',
+    width: '100%',
+    height: '80%',
     resizeMode: 'contain',
   },
   bottomVector: {
@@ -112,6 +111,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 100,
     resizeMode: 'cover',
+    left: 0,
   },
   nextButton: {
     position: 'absolute',
