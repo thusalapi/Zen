@@ -1,6 +1,6 @@
-import React from 'react';
-import { View } from 'react-native';
-import MoodInsights from './../../components/MoodInsights';
+import React from "react";
+import { View } from "react-native";
+import MoodInsights from "../components/MoodInsights";
 
 const App = () => {
   return (
