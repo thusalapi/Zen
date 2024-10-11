@@ -102,7 +102,12 @@ const AllHabitsScreen = ({ navigation }: { navigation: any }) => {
         ))}
       </ScrollView>
       <TouchableOpacity style={styles.addButton}>
-        <Icon name="add" size={24} color="#FFFFFF" />
+        <Icon
+          onPress={() => navigation.navigate("habitform")}
+          name="add"
+          size={24}
+          color="#FFFFFF"
+        />
       </TouchableOpacity>
     </SafeAreaView>
   );
