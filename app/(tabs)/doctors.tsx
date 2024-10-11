@@ -46,5 +46,6 @@ const styles = StyleSheet.create({
   minititle: {
     fontSize: 24,
     fontWeight: "light",
+    marginTop: 20,
   },
 });

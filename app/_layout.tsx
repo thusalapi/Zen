@@ -48,7 +48,12 @@ export default function RootLayout() {
     <ThemeProvider
       value={colorScheme === "dark" ? DarkTheme : CustomLightTheme} // Use custom light theme
     >
-      <Stack>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          headerStyle: {},
+        }}
+      >
         <Stack.Screen name="index" options={{ title: "Home" }} />
         <Stack.Screen name="all-doctors" options={{ title: "All Doctors" }} />
         <Stack.Screen

@@ -28,7 +28,7 @@ export default function Feedback() {
     // TODO: Send feedback data to your backend
     console.log("Feedback:", { doctorId: id, rating, comment });
     // Navigate back to home or show a confirmation
-    router.push("/");
+    router.push("/history");
   };
 
   return (
@@ -90,6 +90,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 16,
+    marginTop: 32,
+    marginBottom: 16,
   },
   title: {
     fontSize: 24,

@@ -23,7 +23,7 @@ export default function AllDoctors() {
           name="arrow-back"
           size={24}
           color="black"
-          onPress={() => router.back()}
+          onPress={() => router.push(`/(tabs)/doctors`)}
         />
         <Text style={styles.title}>Doctors</Text>
         <Ionicons
@@ -80,6 +80,10 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     paddingHorizontal: 16,
-    marginBottom: 16,
+    marginBottom: 24,
+    marginTop: 8,
+  },
+  cardList: {
+    margin: 4,
   },
 });

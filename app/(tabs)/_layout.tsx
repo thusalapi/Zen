@@ -1,6 +1,5 @@
 import { Stack, Tabs } from "expo-router";
 import { Feather } from "@expo/vector-icons";
-import FeelingSelector from "@/components/FeelingSelector";
 
 export default function TabLayout() {
   return (
@@ -60,6 +59,7 @@ export default function TabLayout() {
           name="doctors"
           options={{
             title: "Doctors",
+            headerShown: false,
             tabBarIcon: ({ color }) => (
               <Feather name="users" size={24} color={color} />
             ),
@@ -68,30 +68,35 @@ export default function TabLayout() {
         <Tabs.Screen
           name="alldoctors"
           options={{
+            headerShown: false,
             href: null,
           }}
         />
         <Tabs.Screen
           name="appointment"
           options={{
+            headerShown: false,
             href: null,
           }}
         />
         <Tabs.Screen
           name="doctorDetails"
           options={{
+            headerShown: false,
             href: null,
           }}
         />
         <Tabs.Screen
           name="feedback"
           options={{
+            headerShown: false,
             href: null,
           }}
         />
         <Tabs.Screen
           name="history"
           options={{
+            headerShown: false,
             href: null,
           }}
         />
@@ -100,6 +105,7 @@ export default function TabLayout() {
           options={{
             headerShown: false,
             title: "Habit",
+            headerShown: false,
             tabBarIcon: ({ color }) => (
               <Feather name="plus" size={24} color={color} />
             ),
