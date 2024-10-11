@@ -31,7 +31,7 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
     const fetchHabits = async () => {
       try {
         const response = await axios.get(
-          "http://192.168.34.187:3000/api/habits/6707bed530b32fa9c8952e00"
+          "http://192.168.93.187:3000/api/habits/6707bed530b32fa9c8952e00"
         ); // Replace with your backend URL
         setHabits(response.data); // Assuming data contains an array of habits
       } catch (error) {
@@ -192,6 +192,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    marginTop: 50,
   },
   section: {
     marginBottom: 20,
@@ -206,14 +207,14 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#8B4513",
+    color: "#4F3422",
   },
   viewAllText: {
     fontSize: 16,
-    color: "#8B4513",
+    color: "#4F3422",
   },
   habitItem: {
-    backgroundColor: "#3A3B3C",
+    backgroundColor: "#293754",
     borderRadius: 10,
     padding: 15,
     marginBottom: 10,
@@ -278,7 +279,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: "#8B4513",
+    backgroundColor: "#4F3422",
     justifyContent: "center",
     alignItems: "center",
   },

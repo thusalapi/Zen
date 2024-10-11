@@ -14,7 +14,9 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 
-const CreateNewHabitForm = () => {
+import { NavigationProp } from '@react-navigation/native';
+
+const CreateNewHabitForm = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const [habitName, setHabitName] = useState("Study Art");
   const [selectedIcon, setSelectedIcon] = useState("moon");
   const [repeatType, setRepeatType] = useState("Daily");
@@ -33,7 +35,13 @@ const CreateNewHabitForm = () => {
     end: "",
   }); // Added state for date range
 
-  const icons = ["moon", "tint", "align-center", "user", "running"];
+  const icons = [
+    "camera-retro",
+    "smile-o",
+    "futbol-o",
+    "superpowers",
+    "meetup",
+  ];
   const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
   const toggleDay = (day: any) => {
@@ -92,10 +100,11 @@ const CreateNewHabitForm = () => {
 
     try {
       const response = await axios.post(
-        "http://192.168.34.187:3000/api/habits",
+        "http://192.168.93.187:3000/api/habits",
         formData
       );
-      console.log(response.data); // Handle success response
+      console.log(response.data);
+      navigation.navigate("successmsg"); // Handle success response
     } catch (error) {
       console.error("Error submitting habit form:", error);
     }
@@ -107,7 +116,22 @@ const CreateNewHabitForm = () => {
         <View style={styles.header}>
           <Text style={styles.title}>Create New Habit</Text>
           <TouchableOpacity>
-            <Icon name="bell-o" size={24} color="#000" />
+            <Icon
+              name="bell-o"
+              onPress={() => navigation.navigate("reminder")}
+              size={24}
+              style={{ marginTop: 20 }}
+              color="#000"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Icon
+              name="close"
+              onPress={() => navigation.navigate("Home")}
+              size={24}
+              style={{ marginTop: 20 }}
+              color="#000"
+            />
           </TouchableOpacity>
         </View>
 
@@ -404,6 +428,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    marginTop: 20,
   },
   habitTypeContainer: {
     flexDirection: "row",

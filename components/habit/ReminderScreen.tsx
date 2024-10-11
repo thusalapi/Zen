@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { NavigationProp } from "@react-navigation/native";
 
 const ReminderCard = () => (
   <View style={styles.card}>
@@ -19,7 +20,7 @@ const ReminderCard = () => (
   </View>
 );
 
-const RemindersScreen = () => {
+const RemindersScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -28,7 +29,12 @@ const RemindersScreen = () => {
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Reminders</Text>
         <TouchableOpacity>
-          <Icon name="notifications-outline" size={24} color="#4A4A4A" />
+          <Icon
+            onPress={() => navigation.navigate("Home")}
+            name="home"
+            size={24}
+            color="#4A4A4A"
+          />
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.scrollView}>
@@ -52,6 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     backgroundColor: '#FFFFFF',
+    marginTop: 20,
   },
   headerTitle: {
     fontSize: 20,
