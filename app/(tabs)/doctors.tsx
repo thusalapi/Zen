@@ -4,6 +4,7 @@ import SearchBar from "@/components/professional/SearchBar";
 import ViewAllHeader from "@/components/professional/ViewAllHeader";
 import DoctorList from "@/components/professional/DoctorsList";
 import { useDoctors } from "@/hooks/useDoctors";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfessionalSupport() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,14 +18,14 @@ export default function ProfessionalSupport() {
   if (error) return <Text>Error: {error.message}</Text>;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.minititle}>Hi Patient</Text>
       <Text style={styles.title}>Let's Find</Text>
       <Text style={styles.title2}>Your Doctor</Text>
       <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
       <ViewAllHeader title="Recommended" />
       <DoctorList doctors={filteredDoctors} />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -46,6 +47,5 @@ const styles = StyleSheet.create({
   minititle: {
     fontSize: 24,
     fontWeight: "light",
-    marginTop: 20,
   },
 });
