@@ -137,9 +137,13 @@ const MoodJournal: React.FC<MoodJournalProps> = ({ route }) => {
         contentContainerStyle={styles.journalList}
       />
 
-      <TouchableOpacity style={styles.insightsButton}>
-        <Text style={styles.insightsText}>Mood Insights ⟶</Text>
-      </TouchableOpacity>
+      <TouchableOpacity 
+  style={styles.insightsButton}
+  onPress={() => navigation.navigate('insight')} // Navigate to the Insights page
+>
+  <Text style={styles.insightsText}>Mood Insights ⟶</Text>
+</TouchableOpacity>
+
 
       <Modal
         visible={modalVisible}
