@@ -7,6 +7,7 @@ import {
   StyleSheet,
   SafeAreaView,
   ScrollView,
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -16,16 +17,23 @@ import {
   Sora_700Bold,
 } from "@expo-google-fonts/sora";
 import AppLoading from "expo-app-loading";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
 
-interface DeepBreathingExerciseProps {
-  onBackPress: () => void;
-  onViewTutorial: () => void;
-}
+type RootStackParamList = {
+  ExercisePage: undefined;
+  Exercises: undefined;
+};
 
-const ExercisePage: React.FC<DeepBreathingExerciseProps> = ({
-  onBackPress,
-  onViewTutorial,
-}) => {
+type ExercisePageNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "ExercisePage"
+>;
+
+const ExercisePage: React.FC = () => {
+  const navigation = useNavigation<ExercisePageNavigationProp>();
+
   let [fontsLoaded] = useFonts({
     Sora_400Regular,
     Sora_600SemiBold,
@@ -40,14 +48,17 @@ const ExercisePage: React.FC<DeepBreathingExerciseProps> = ({
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Exercises")}
+            style={styles.backButton}
+          >
             <Ionicons name="chevron-back" size={24} color="black" />
           </TouchableOpacity>
           <Text style={styles.title}>Deep Breathing</Text>
         </View>
 
         <Image
-          source={require("../assets/images/exercise-big.png")}
+          source={require("../../assets/images/exercise-big.png")}
           style={styles.exerciseImage}
         />
 
@@ -69,7 +80,9 @@ const ExercisePage: React.FC<DeepBreathingExerciseProps> = ({
 
           <TouchableOpacity
             style={styles.tutorialButton}
-            onPress={onViewTutorial}
+            onPress={() =>
+              Linking.openURL("https://www.youtube.com/watch?v=DJt6ORwxKmE")
+            }
           >
             <Text style={styles.tutorialButtonText}>View Video Tutorial</Text>
           </TouchableOpacity>
@@ -131,7 +144,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     alignSelf: "center",
-
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -139,7 +151,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   tutorialButtonText: {

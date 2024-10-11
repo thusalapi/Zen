@@ -13,18 +13,20 @@ export default function SearchBar({ value, onChangeText }: Props) {
       placeholder="Search your doctor"
       value={value}
       onChangeText={onChangeText}
+      placeholderTextColor="#000"
     />
   );
 }
 
 const styles = StyleSheet.create({
   input: {
-    height: 60,
+    height: 40,
     borderColor: "gray",
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
     borderRadius: 20,
     paddingHorizontal: 15,
     marginBottom: 20,
+    color: "#000",
   },
 });

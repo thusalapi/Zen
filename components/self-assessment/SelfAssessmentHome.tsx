@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation
 import {
   useFonts,
   Sora_400Regular,
@@ -15,6 +16,23 @@ import {
   Sora_700Bold,
 } from "@expo-google-fonts/sora";
 import AppLoading from "expo-app-loading";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
+
+type RootStackParamList = {
+  SelfAssessmentHome: undefined;
+  Question1: undefined;
+  Question2: undefined;
+  Question3: undefined;
+  Question4: undefined;
+  Question5: undefined;
+  ExercisePage: undefined;
+};
+
+type SelfAssessmentHomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "SelfAssessmentHome"
+>;
 
 interface ExerciseProps {
   title: string;
@@ -31,12 +49,15 @@ const ExerciseCard: React.FC<ExerciseProps> = ({
     <Image source={imageSource} style={styles.exerciseImage} />
     <View style={styles.exerciseInfo}>
       <Text style={styles.exerciseTitle}>{title}</Text>
+      <View style={styles.horizontalLine} />
       <Text style={styles.exerciseDuration}>{duration}</Text>
     </View>
   </View>
 );
 
 const SelfAssessmentHome: React.FC = () => {
+  const navigation = useNavigation<SelfAssessmentHomeScreenNavigationProp>();
+
   let [fontsLoaded] = useFonts({
     Sora_400Regular,
     Sora_600SemiBold,
@@ -46,6 +67,14 @@ const SelfAssessmentHome: React.FC = () => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
+  const handleNavigateToQuestion1 = () => {
+    navigation.navigate("Question1");
+  };
+
+  const handleNavigateToExercise = () => {
+    navigation.navigate("ExercisePage");
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -58,12 +87,15 @@ const SelfAssessmentHome: React.FC = () => {
             </Text>
           </View>
           <Image
-            source={require("../assets/images/header.png")}
+            source={require("../../assets/images/header.png")}
             style={styles.brainImage}
           />
         </View>
 
-        <TouchableOpacity style={styles.assessmentButton}>
+        <TouchableOpacity
+          style={styles.assessmentButton}
+          onPress={handleNavigateToQuestion1}
+        >
           <Text style={styles.assessmentButtonText}>
             Take a Self-Assessment
           </Text>
@@ -71,26 +103,34 @@ const SelfAssessmentHome: React.FC = () => {
 
         <Text style={styles.sectionTitle}>Recommended Exercises</Text>
 
-        <ExerciseCard
-          title="Deep Breathing"
-          duration="(20 minutes)"
-          imageSource={require("../assets/images/exercise1.png")}
-        />
-        <ExerciseCard
-          title="Visualization"
-          duration="(20 minutes)"
-          imageSource={require("../assets/images/exercise2.png")}
-        />
-        <ExerciseCard
-          title="Mindful Walk"
-          duration="(20 minutes)"
-          imageSource={require("../assets/images/exercise3.png")}
-        />
-        <ExerciseCard
-          title="Gratitude Pause"
-          duration="(20 minutes)"
-          imageSource={require("../assets/images/exercise4.png")}
-        />
+        <TouchableOpacity onPress={handleNavigateToExercise}>
+          <ExerciseCard
+            title="Deep Breathing"
+            duration="(20 minutes)"
+            imageSource={require("../../assets/images/exercise1.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleNavigateToExercise}>
+          <ExerciseCard
+            title="Visualization"
+            duration="(20 minutes)"
+            imageSource={require("../../assets/images/exercise2.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleNavigateToExercise}>
+          <ExerciseCard
+            title="Mindful Walk"
+            duration="(20 minutes)"
+            imageSource={require("../../assets/images/exercise3.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleNavigateToExercise}>
+          <ExerciseCard
+            title="Gratitude Pause"
+            duration="(20 minutes)"
+            imageSource={require("../../assets/images/exercise4.png")}
+          />
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -119,18 +159,24 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "Sora_700Bold",
-    fontSize: 28,
+    fontSize: 26,
     marginBottom: 10,
   },
   subtitle: {
     fontFamily: "Sora_400Regular",
-    fontSize: 16,
+    fontSize: 14,
     color: "#fff",
   },
   brainImage: {
-    width: 180,
-    height: 180,
+    width: 150,
+    height: 150,
     resizeMode: "contain",
+  },
+  horizontalLine: {
+    borderBottomColor: "#000",
+    borderBottomWidth: 1,
+    marginVertical: 8,
+    width: "100%",
   },
   assessmentButton: {
     paddingVertical: 15,
@@ -180,6 +226,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     resizeMode: "cover",
+    margin: 10,
   },
   exerciseInfo: {
     flex: 1,

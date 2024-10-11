@@ -5,8 +5,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  ScrollView,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { StackNavigationProp } from "@react-navigation/stack"; // Import StackNavigationProp
 import {
   useFonts,
   Sora_400Regular,
@@ -14,12 +15,24 @@ import {
 } from "@expo-google-fonts/sora";
 import AppLoading from "expo-app-loading";
 
-type Option = {
-  id: number;
-  text: string;
+type RootStackParamList = {
+  Question1: undefined;
+  Question2: undefined;
+  Question3: undefined;
+  Question4: undefined;
+  Question5: undefined;
 };
 
-const options: Option[] = [
+type Question3NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Question3"
+>;
+
+type Props = {
+  navigation: Question3NavigationProp;
+};
+
+const options = [
   { id: 1, text: "Physical activities" },
   { id: 2, text: "Relaxation techniques" },
   { id: 3, text: "Talking to friends or family" },
@@ -27,7 +40,7 @@ const options: Option[] = [
   { id: 5, text: "I struggle to cope with stress" },
 ];
 
-const Question3: React.FC = () => {
+const Question3: React.FC<Props> = ({ navigation }) => {
   const [selectedOption, setSelectedOption] = useState<number>(2);
 
   let [fontsLoaded] = useFonts({
@@ -40,56 +53,63 @@ const Question3: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/images/bg2.png")}
-        style={styles.imageBackground}
-        resizeMode="contain"
-      ></ImageBackground>
-      <View style={styles.content}>
-        <View style={styles.progressContainer}>
-          {[1, 2, 3, 4, 5].map((num) => (
-            <View
-              key={num}
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../../assets/images/bg2.png")}
+          style={styles.imageBackground}
+          resizeMode="contain"
+        ></ImageBackground>
+        <View style={styles.content}>
+          <View style={styles.progressContainer}>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <View
+                key={num}
+                style={[
+                  styles.progressCircle,
+                  num === 3 && styles.activeProgressCircle,
+                  num <= 2 && styles.completedProgressCircle,
+                ]}
+              >
+                {num === 3 && <Text style={styles.progressNumber}>3</Text>}
+              </View>
+            ))}
+          </View>
+
+          <Text style={styles.question}>
+            How do you typically cope with stress?
+          </Text>
+
+          {options.map((option) => (
+            <TouchableOpacity
+              key={option.id}
               style={[
-                styles.progressCircle,
-                num === 3 && styles.activeProgressCircle,
-                num === 1 && styles.completedProgressCircle,
-                num === 2 && styles.completedProgressCircle,
+                styles.optionButton,
+                selectedOption === option.id && styles.selectedOption,
               ]}
+              onPress={() => setSelectedOption(option.id)}
             >
-              {num === 3 && <Text style={styles.progressNumber}>3</Text>}
-            </View>
+              <Text style={styles.optionText}>{option.text}</Text>
+            </TouchableOpacity>
           ))}
-        </View>
 
-        <Text style={styles.question}>
-          How do you typically cope with stress?
-        </Text>
-
-        {options.map((option) => (
-          <TouchableOpacity
-            key={option.id}
-            style={[
-              styles.optionButton,
-              selectedOption === option.id && styles.selectedOption,
-            ]}
-            onPress={() => setSelectedOption(option.id)}
-          >
-            <Text style={styles.optionText}>{option.text}</Text>
-          </TouchableOpacity>
-        ))}
-
-        <View style={styles.navigationContainer}>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>Next</Text>
-          </TouchableOpacity>
+          <View style={styles.navigationContainer}>
+            <TouchableOpacity
+              style={styles.navButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Text style={styles.navButtonText}>Back</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.navButton}
+              onPress={() => navigation.navigate("Question4")}
+            >
+              <Text style={styles.navButtonText}>Next</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -101,7 +121,7 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     width: "100%",
-    height: "59.5%",
+    height: "59.6%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -115,8 +135,8 @@ const styles = StyleSheet.create({
   progressContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 50,
-    marginTop: 80,
+    marginBottom: 60,
+    marginTop: 40,
   },
   progressCircle: {
     width: 40,
@@ -140,7 +160,7 @@ const styles = StyleSheet.create({
     fontFamily: "Sora_700Bold",
   },
   question: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 80,
@@ -171,7 +191,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 80,
+    marginTop: 30,
   },
   navButton: {
     padding: 10,

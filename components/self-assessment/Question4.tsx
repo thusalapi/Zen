@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 import {
   useFonts,
@@ -12,6 +13,24 @@ import {
   Sora_700Bold,
 } from "@expo-google-fonts/sora";
 import AppLoading from "expo-app-loading";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type RootStackParamList = {
+  Question1: undefined;
+  Question2: undefined;
+  Question3: undefined;
+  Question4: undefined;
+  Question5: undefined;
+};
+
+type Question4NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Question4"
+>;
+
+type Props = {
+  navigation: Question4NavigationProp;
+};
 
 type Option = {
   id: number;
@@ -25,7 +44,7 @@ const options: Option[] = [
   { id: 4, text: "I don’t have any personal goals" },
 ];
 
-const Question4: React.FC = () => {
+const Question4: React.FC<Props> = ({ navigation }) => {
   const [selectedOption, setSelectedOption] = useState<number>(2);
 
   let [fontsLoaded] = useFonts({
@@ -38,57 +57,65 @@ const Question4: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <ImageBackground
-          source={require("../assets/images/bg1.png")}
-          style={styles.imageBackground}
-          resizeMode="contain"
-        ></ImageBackground>
-        <View style={styles.progressContainer}>
-          {[1, 2, 3, 4, 5].map((num) => (
-            <View
-              key={num}
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <ImageBackground
+            source={require("../../assets/images/bg1.png")}
+            style={styles.imageBackground}
+            resizeMode="contain"
+          ></ImageBackground>
+          <View style={styles.progressContainer}>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <View
+                key={num}
+                style={[
+                  styles.progressCircle,
+                  num === 4 && styles.activeProgressCircle,
+                  num === 1 && styles.completedProgressCircle,
+                  num === 2 && styles.completedProgressCircle,
+                  num === 3 && styles.completedProgressCircle,
+                ]}
+              >
+                {num === 4 && <Text style={styles.progressNumber}>4</Text>}
+              </View>
+            ))}
+          </View>
+
+          <Text style={styles.question}>
+            How motivated do you feel to work toward your personal goals?
+          </Text>
+
+          {options.map((option) => (
+            <TouchableOpacity
+              key={option.id}
               style={[
-                styles.progressCircle,
-                num === 4 && styles.activeProgressCircle,
-                num === 1 && styles.completedProgressCircle,
-                num === 2 && styles.completedProgressCircle,
-                num === 3 && styles.completedProgressCircle,
+                styles.optionButton,
+                selectedOption === option.id && styles.selectedOption,
               ]}
+              onPress={() => setSelectedOption(option.id)}
             >
-              {num === 4 && <Text style={styles.progressNumber}>4</Text>}
-            </View>
+              <Text style={styles.optionText}>{option.text}</Text>
+            </TouchableOpacity>
           ))}
-        </View>
 
-        <Text style={styles.question}>
-          How motivated do you feel to work toward your personal goals?
-        </Text>
-
-        {options.map((option) => (
-          <TouchableOpacity
-            key={option.id}
-            style={[
-              styles.optionButton,
-              selectedOption === option.id && styles.selectedOption,
-            ]}
-            onPress={() => setSelectedOption(option.id)}
-          >
-            <Text style={styles.optionText}>{option.text}</Text>
-          </TouchableOpacity>
-        ))}
-
-        <View style={styles.navigationContainer}>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>Next</Text>
-          </TouchableOpacity>
+          <View style={styles.navigationContainer}>
+            <TouchableOpacity
+              style={styles.navButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Text style={styles.navButtonText}>Back</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.navButton}
+              onPress={() => navigation.navigate("Question5")}
+            >
+              <Text style={styles.navButtonText}>Next</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -100,7 +127,7 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     width: "100%",
-    height: "65.2%",
+    height: "65%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -115,7 +142,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: 60,
-    marginTop: 80,
+    marginTop: 40,
   },
   progressCircle: {
     width: 40,
@@ -139,7 +166,7 @@ const styles = StyleSheet.create({
     fontFamily: "Sora_700Bold",
   },
   question: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 100,
@@ -170,7 +197,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 80,
+    marginTop: 60,
   },
   navButton: {
     padding: 10,

@@ -57,9 +57,13 @@ export default function DoctorDetails() {
             <Text style={styles.doctorName}>{doctor.name}</Text>
             <View style={styles.horizontalLine} />
             <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
-            <Text style={styles.doctorRating}>
-              ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
-            </Text>
+            <View style={styles.ratingContainer}>
+              <Text style={styles.ratingText}>★ {doctor.rating}/5.0</Text>
+              <Text style={styles.reviewsText}>
+                {" "}
+                ({doctor.reviews}+ reviews)
+              </Text>
+            </View>
           </View>
         </View>
 
@@ -71,8 +75,12 @@ export default function DoctorDetails() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Contact Information</Text>
           <View style={styles.contactInfo}>
-            <Text>• Phone: {doctor.phone}</Text>
-            <Text>• Email: {doctor.email}</Text>
+            <Text style={styles.subSectionContent}>
+              • Phone: {doctor.phone}
+            </Text>
+            <Text style={styles.subSectionContent}>
+              • Email: {doctor.email}
+            </Text>
           </View>
         </View>
 
@@ -80,7 +88,9 @@ export default function DoctorDetails() {
           <Text style={styles.sectionTitle}>Availability</Text>
           <View style={styles.availability}>
             {doctor.availability.map((time, index) => (
-              <Text key={index}>• {time}</Text>
+              <Text style={styles.subSectionContent} key={index}>
+                • {time}
+              </Text>
             ))}
           </View>
         </View>
@@ -105,7 +115,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 32,
     padding: 16,
     marginBottom: 16,
   },
@@ -147,9 +156,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "gray",
   },
-  doctorRating: {
+  ratingText: {
     fontSize: 14,
     marginTop: 8,
+    color: "#EAC612",
+  },
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  reviewsText: {
+    marginTop: 8,
+    fontSize: 12,
+    color: "#666",
   },
   section: {
     padding: 16,
@@ -162,6 +181,11 @@ const styles = StyleSheet.create({
   sectionContent: {
     fontSize: 16,
     lineHeight: 24,
+  },
+  subSectionContent: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 8,
   },
   contactInfo: {
     backgroundColor: "#FFFF",
@@ -184,5 +208,8 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  contentInfo: {
+    marginBottom: 8,
   },
 });

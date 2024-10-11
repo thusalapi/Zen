@@ -4,6 +4,7 @@ import HabitsAndGoalsScreen from "./HabitsAndGoalsScreen";
 import CreateNewHabitForm from "./CreateNewHabitForm";
 import RemindersScreen from "./ReminderScreen";
 import AllHabitsScreen from "./AllHabitsScreen";
+import SuccessScreen from "./SuccessScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,11 @@ const HabitNavigation = () => {
         options={{ headerShown: false }}
         name="allhabit"
         component={AllHabitsScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="successmsg"
+        component={SuccessScreen}
       />
     </Stack.Navigator>
   );

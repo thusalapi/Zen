@@ -5,14 +5,34 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  ScrollView,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import {
   useFonts,
   Sora_400Regular,
   Sora_700Bold,
 } from "@expo-google-fonts/sora";
 import AppLoading from "expo-app-loading";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type RootStackParamList = {
+  Question1: undefined;
+  Question2: undefined;
+  Question3: undefined;
+  Question4: undefined;
+  Question5: undefined;
+  Exercises: undefined;
+};
+
+type Question5NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Question5"
+>;
+
+type Props = {
+  navigation: Question5NavigationProp;
+};
 
 type Option = {
   id: number;
@@ -20,14 +40,17 @@ type Option = {
 };
 
 const options: Option[] = [
-  { id: 1, text: "Very well, no issues" },
-  { id: 2, text: "Mostly well, minor challenges" },
-  { id: 3, text: "Struggling occasionally" },
-  { id: 4, text: "Struggling often" },
+  { id: 1, text: "Very happy" },
+  { id: 2, text: "Calm and relaxed" },
+  { id: 3, text: "Neutral" },
+  { id: 4, text: "Anxious or stressed" },
+  { id: 5, text: "Depressed or low" },
 ];
 
-const Question2: React.FC = () => {
+const Question5: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<number>(2);
+
+  const navigation = useNavigation<Question5NavigationProp>();
 
   let [fontsLoaded] = useFonts({
     Sora_400Regular,
@@ -39,30 +62,33 @@ const Question2: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/images/bg1.png")}
-        style={styles.imageBackground}
-        resizeMode="contain"
-      ></ImageBackground>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.content}>
+        <ImageBackground
+          source={require("../../assets/images/bg2.png")}
+          style={styles.imageBackground}
+          resizeMode="contain"
+        ></ImageBackground>
         <View style={styles.progressContainer}>
           {[1, 2, 3, 4, 5].map((num) => (
             <View
               key={num}
               style={[
                 styles.progressCircle,
-                num === 2 && styles.activeProgressCircle,
+                num === 5 && styles.activeProgressCircle,
                 num === 1 && styles.completedProgressCircle,
+                num === 2 && styles.completedProgressCircle,
+                num === 3 && styles.completedProgressCircle,
+                num === 4 && styles.completedProgressCircle,
               ]}
             >
-              {num === 2 && <Text style={styles.progressNumber}>2</Text>}
+              {num === 5 && <Text style={styles.progressNumber}>5</Text>}
             </View>
           ))}
         </View>
 
         <Text style={styles.question}>
-          How well are you managing your daily responsibilities?
+          How would you rate your current mood?
         </Text>
 
         {options.map((option) => (
@@ -79,15 +105,22 @@ const Question2: React.FC = () => {
         ))}
 
         <View style={styles.navigationContainer}>
-          <TouchableOpacity style={styles.navButton}>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.goBack()}
+          >
             <Text style={styles.navButtonText}>Back</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>Next</Text>
+
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate("Exercises")}
+          >
+            <Text style={styles.navButtonText}>Finish</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -99,7 +132,7 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     width: "100%",
-    height: "65.2%",
+    height: "59.6%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -114,7 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: 60,
-    marginTop: 80,
+    marginTop: 40,
   },
   progressCircle: {
     width: 40,
@@ -138,10 +171,10 @@ const styles = StyleSheet.create({
     fontFamily: "Sora_700Bold",
   },
   question: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 100,
+    marginBottom: 80,
     fontFamily: "Sora_700Bold",
   },
   optionButton: {
@@ -169,7 +202,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 80,
+    marginTop: 30,
   },
   navButton: {
     padding: 10,
@@ -181,4 +214,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Question2;
+export default Question5;

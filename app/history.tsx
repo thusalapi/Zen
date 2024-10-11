@@ -112,7 +112,7 @@ const HistoryScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F7F4F2",
+    backgroundColor: "#FFF1E8",
     padding: 20,
   },
   header: {
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#FFD700",
+    color: "#EAC612",
     marginRight: 5,
   },
   reviewsText: {
