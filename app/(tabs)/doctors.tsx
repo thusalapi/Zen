@@ -32,7 +32,7 @@ export default function ProfessionalSupport() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 10,
     backgroundColor: "#F7F4F2",
   },
   title: {
