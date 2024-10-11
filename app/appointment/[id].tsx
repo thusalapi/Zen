@@ -8,10 +8,13 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useDoctors } from "../../hooks/useDoctors";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function Appointment() {
   const router = useRouter();
@@ -20,10 +23,12 @@ export default function Appointment() {
 
   const doctor = doctors.find((d) => d.id === id);
 
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(new Date());
   const [fullName, setFullName] = useState("");
   const [notes, setNotes] = useState("");
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
 
   if (!doctor) return <Text>Doctor not found</Text>;
 
@@ -31,8 +36,8 @@ export default function Appointment() {
     // Prepare the appointment data
     const appointmentData = {
       doctorId: id,
-      date,
-      time,
+      date: date.toISOString().split("T")[0],
+      time: time.toTimeString().split(" ")[0],
       fullName,
       notes,
     };
@@ -43,82 +48,119 @@ export default function Appointment() {
     router.push(`/history`);
   };
 
+  const onDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShowDatePicker(Platform.OS === "ios");
+    setDate(currentDate);
+  };
+
+  const onTimeChange = (event, selectedTime) => {
+    const currentTime = selectedTime || time;
+    setShowTimePicker(Platform.OS === "ios");
+    setTime(currentTime);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.header}>
-          <Ionicons
-            name="arrow-back"
-            size={24}
-            color="black"
-            onPress={() => router.push(`/doctor-details/${doctor.id}`)}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardAvoidingView}
+      >
+        <ScrollView>
+          <View style={styles.header}>
+            <Ionicons
+              name="arrow-back"
+              size={24}
+              color="black"
+              onPress={() => router.push(`/doctor-details/${doctor.id}`)}
+            />
+            <Text style={styles.title}>Appointment</Text>
+            <View style={styles.placeholder} />
+          </View>
+
+          <View style={styles.doctorCard}>
+            <Image source={doctor.image} style={styles.doctorImage} />
+            <View style={styles.doctorInfo}>
+              <Text style={styles.doctorName}>{doctor.name}</Text>
+              <View style={styles.horizontalLine} />
+              <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
+              <Text style={styles.doctorRating}>
+                ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.form}>
+            <Text style={styles.formTitle}>Appointment Details</Text>
+
+            <View style={styles.inputRow}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.label}>Date</Text>
+                <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+                  <Text style={styles.input}>
+                    {date.toISOString().split("T")[0]}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.label}>Time</Text>
+                <TouchableOpacity onPress={() => setShowTimePicker(true)}>
+                  <Text style={styles.input}>
+                    {time.toTimeString().split(" ")[0]}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Full Name</Text>
+              <TextInput
+                style={styles.input}
+                value={fullName}
+                onChangeText={setFullName}
+                placeholder="Enter your full name"
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Notes</Text>
+              <TextInput
+                style={[styles.input, styles.notesInput]}
+                value={notes}
+                onChangeText={setNotes}
+                placeholder="Add any notes for the doctor"
+                multiline
+              />
+            </View>
+          </View>
+        </ScrollView>
+
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitButtonText}>Submit</Text>
+        </TouchableOpacity>
+
+        {showDatePicker && (
+          <DateTimePicker
+            testID="datePicker"
+            value={date}
+            mode="date"
+            is24Hour={true}
+            display="default"
+            onChange={onDateChange}
           />
-          <Text style={styles.title}>Appointment</Text>
-          <View style={styles.placeholder} />
-        </View>
+        )}
 
-        <View style={styles.doctorCard}>
-          <Image source={doctor.image} style={styles.doctorImage} />
-          <View style={styles.doctorInfo}>
-            <Text style={styles.doctorName}>{doctor.name}</Text>
-            <View style={styles.horizontalLine} />
-            <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
-            <Text style={styles.doctorRating}>
-              ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.form}>
-          <Text style={styles.formTitle}>Appointment Details</Text>
-
-          <View style={styles.inputRow}>
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Date</Text>
-              <TextInput
-                style={styles.input}
-                value={date}
-                onChangeText={setDate}
-                placeholder="Select Date"
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Time</Text>
-              <TextInput
-                style={styles.input}
-                value={time}
-                onChangeText={setTime}
-                placeholder="Select Time"
-              />
-            </View>
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Full Name</Text>
-            <TextInput
-              style={styles.input}
-              value={fullName}
-              onChangeText={setFullName}
-              placeholder="Enter your full name"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Notes</Text>
-            <TextInput
-              style={[styles.input, styles.notesInput]}
-              value={notes}
-              onChangeText={setNotes}
-              placeholder="Add any notes for the doctor"
-              multiline
-            />
-          </View>
-        </View>
-      </ScrollView>
-
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitButtonText}>Submit</Text>
-      </TouchableOpacity>
+        {showTimePicker && (
+          <DateTimePicker
+            testID="timePicker"
+            value={time}
+            mode="time"
+            is24Hour={true}
+            display="default"
+            onChange={onTimeChange}
+          />
+        )}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -127,6 +169,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F7F4F2",
+  },
+  keyboardAvoidingView: {
+    flex: 1,
   },
   header: {
     flexDirection: "row",
@@ -207,7 +252,7 @@ const styles = StyleSheet.create({
   },
   notesInput: {
     textAlignVertical: "top",
-    // height: 300,
+    height: 100,
   },
   submitButton: {
     backgroundColor: "#D2B48C",
