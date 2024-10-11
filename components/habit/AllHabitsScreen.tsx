@@ -116,7 +116,7 @@ const AllHabitsScreen = ({ navigation }: { navigation: any }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#F7F4F2",
   },
   scrollView: {
     flex: 1,

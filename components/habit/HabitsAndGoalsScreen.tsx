@@ -57,20 +57,37 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
     { id: 2, name: "Drink water", frequency: "4/7 days" },
   ];
 
+  const dayMap = {
+    1: "M", // Monday
+    2: "T", // Tuesday
+    3: "W", // Wednesday
+    4: "T", // Thursday
+    5: "F", // Friday
+    6: "S", // Saturday
+    7: "S", // Sunday
+  };
+
   const renderHabitItem = (habit: any) => (
     <View style={styles.habitItem}>
       <Text style={styles.habitText}>{habit.habitName}</Text>
       <View style={styles.habitRight}>
-        <Text style={styles.habitDuration}>
-          {(new Date(habit.dateRange.end).getTime() -
-            new Date(habit.dateRange.start).getTime()) /
-            (1000 * 60 * 60 * 24)}{" "}
-          days
-        </Text>
+        {habit.selectedDays && habit.selectedDays.length > 0 ? (
+          <Text style={styles.habitDuration}>
+            {habit.selectedDays.map((day: number) => dayMap[day]).join(" ")}
+          </Text>
+        ) : (
+          <Text style={styles.habitDuration}>
+            {(new Date(habit.dateRange.end).getTime() -
+              new Date(habit.dateRange.start).getTime()) /
+              (1000 * 60 * 60 * 24)}{" "}
+            days
+          </Text>
+        )}
         <Icon name="chevron-right" size={24} color="#FFFFFF" />
       </View>
     </View>
   );
+
 
   const renderGoalItem = (goal: any) => (
     <View style={[styles.goalItem, { backgroundColor: goal.color }]}>
