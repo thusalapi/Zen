@@ -47,8 +47,8 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
   console.log(habits);
 
   const goals = [
-    { id: 1, name: "Be healthy", duration: "2 month", color: "#A8D8D8" },
-    { id: 2, name: "Be healthy", duration: "2 month", color: "#B8E0B8" },
+    { id: 1, name: "Study Art", duration: "6 days", color: "#A8D8D8" },
+    { id: 2, name: "Run", duration: "S M", color: "#B8E0B8" },
     { id: 3, name: "Be healthy", duration: "2 month", color: "#A8D8D8" },
   ];
 
@@ -57,20 +57,37 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
     { id: 2, name: "Drink water", frequency: "4/7 days" },
   ];
 
+  const dayMap = {
+    1: "M", // Monday
+    2: "T", // Tuesday
+    3: "W", // Wednesday
+    4: "T", // Thursday
+    5: "F", // Friday
+    6: "S", // Saturday
+    7: "S", // Sunday
+  };
+
   const renderHabitItem = (habit: any) => (
     <View style={styles.habitItem}>
       <Text style={styles.habitText}>{habit.habitName}</Text>
       <View style={styles.habitRight}>
-        <Text style={styles.habitDuration}>
-          {(new Date(habit.dateRange.end).getTime() -
-            new Date(habit.dateRange.start).getTime()) /
-            (1000 * 60 * 60 * 24)}{" "}
-          days
-        </Text>
+        {habit.selectedDays && habit.selectedDays.length > 0 ? (
+          <Text style={styles.habitDuration}>
+            {habit.selectedDays.map((day: number) => dayMap[day]).join(" ")}
+          </Text>
+        ) : (
+          <Text style={styles.habitDuration}>
+            {(new Date(habit.dateRange.end).getTime() -
+              new Date(habit.dateRange.start).getTime()) /
+              (1000 * 60 * 60 * 24)}{" "}
+            days
+          </Text>
+        )}
         <Icon name="chevron-right" size={24} color="#FFFFFF" />
       </View>
     </View>
   );
+
 
   const renderGoalItem = (goal: any) => (
     <View style={[styles.goalItem, { backgroundColor: goal.color }]}>
@@ -192,10 +209,20 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
                   </View>
                   <View style={styles.modalHabitRight}>
                     <Text style={styles.modalHabitFrequency}>
-                      {(new Date(habit.dateRange.end).getTime() -
-                        new Date(habit.dateRange.start).getTime()) /
-                        (1000 * 60 * 60 * 24)}{" "}
-                      days
+                      {habit.selectedDays && habit.selectedDays.length > 0 ? (
+                        <Text style={styles.habitDuration}>
+                          {habit.selectedDays
+                            .map((day: number) => dayMap[day])
+                            .join(" ")}
+                        </Text>
+                      ) : (
+                        <Text style={styles.habitDuration}>
+                          {(new Date(habit.dateRange.end).getTime() -
+                            new Date(habit.dateRange.start).getTime()) /
+                            (1000 * 60 * 60 * 24)}{" "}
+                          days
+                        </Text>
+                      )}
                     </Text>
                     {selectedHabits[habit._id] && (
                       <View style={styles.checkCircle}>
@@ -216,12 +243,12 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F7F5F2",
+    backgroundColor: "#F7F4F2",
   },
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#4F3422",
+    color: "#151515",
     marginBottom: 4,
     marginTop: 40,
     marginLeft: 16,
@@ -276,14 +303,14 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#4F3422",
+    color: "#151515",
   },
   viewAllText: {
     fontSize: 16,
-    color: "#4F3422",
+    color: "#151515",
   },
   habitItem: {
-    backgroundColor: "#293754",
+    backgroundColor: "#4F3422",
     borderRadius: 10,
     padding: 15,
     marginBottom: 10,
@@ -388,7 +415,7 @@ const styles = StyleSheet.create({
   },
   modalHabitLeft: {
     flex: 2,
-    backgroundColor: "#4169E1",
+    backgroundColor: "#4F3422",
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     padding: 15,
@@ -403,7 +430,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#87CEFA",
+    backgroundColor: "#D6C0B3",
     padding: 15,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,

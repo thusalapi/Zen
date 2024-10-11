@@ -403,7 +403,7 @@ const CreateNewHabitForm = ({ navigation }: { navigation: NavigationProp<any> })
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#F7F4F2",
   },
   scrollContent: {
     padding: 20,
