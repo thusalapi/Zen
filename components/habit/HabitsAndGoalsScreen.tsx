@@ -209,10 +209,20 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
                   </View>
                   <View style={styles.modalHabitRight}>
                     <Text style={styles.modalHabitFrequency}>
-                      {(new Date(habit.dateRange.end).getTime() -
-                        new Date(habit.dateRange.start).getTime()) /
-                        (1000 * 60 * 60 * 24)}{" "}
-                      days
+                      {habit.selectedDays && habit.selectedDays.length > 0 ? (
+                        <Text style={styles.habitDuration}>
+                          {habit.selectedDays
+                            .map((day: number) => dayMap[day])
+                            .join(" ")}
+                        </Text>
+                      ) : (
+                        <Text style={styles.habitDuration}>
+                          {(new Date(habit.dateRange.end).getTime() -
+                            new Date(habit.dateRange.start).getTime()) /
+                            (1000 * 60 * 60 * 24)}{" "}
+                          days
+                        </Text>
+                      )}
                     </Text>
                     {selectedHabits[habit._id] && (
                       <View style={styles.checkCircle}>
@@ -405,7 +415,7 @@ const styles = StyleSheet.create({
   },
   modalHabitLeft: {
     flex: 2,
-    backgroundColor: "#4169E1",
+    backgroundColor: "#4F3422",
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     padding: 15,
@@ -420,7 +430,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#87CEFA",
+    backgroundColor: "#D6C0B3",
     padding: 15,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
