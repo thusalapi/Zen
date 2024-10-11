@@ -7,6 +7,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Modal,
+  Image,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import axios from "axios";
@@ -124,6 +125,20 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
       </View>
 
       <ScrollView style={styles.scrollView}>
+        <View style={styles.header}>
+          <View style={styles.headerText}>
+            <Text style={styles.title}>
+              Build Better Habits
+            </Text>
+            <Text style={styles.subtitle}>
+              Observe your thoughts and emotions.
+            </Text>
+          </View>
+          <Image
+            source={require("../../assets/images/header.png")}
+            style={styles.brainImage}
+          />
+        </View>
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Habits</Text>
@@ -147,12 +162,12 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
           ))}
         </View>
       </ScrollView>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => navigation.navigate("habitform")}
         style={styles.addButton}
       >
         <Icon name="plus" size={30} color="#FFFFFF" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <Modal
         animationType="fade"
@@ -170,20 +185,23 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
             </TouchableOpacity>
             <Text style={styles.modalTitle}>Add habits to goal</Text>
             <ScrollView style={styles.modalScrollView}>
-              {modalHabits.map((habit) => (
+              {habits.map((habit) => (
                 <TouchableOpacity
-                  key={habit.id}
+                  key={habit._id}
                   style={styles.modalHabitItem}
-                  onPress={() => toggleHabitSelection(habit.id)}
+                  onPress={() => toggleHabitSelection(habit._id)}
                 >
                   <View style={styles.modalHabitLeft}>
-                    <Text style={styles.modalHabitName}>{habit.name}</Text>
+                    <Text style={styles.modalHabitName}>{habit.habitName}</Text>
                   </View>
                   <View style={styles.modalHabitRight}>
                     <Text style={styles.modalHabitFrequency}>
-                      {habit.frequency}
+                      {(new Date(habit.dateRange.end).getTime() -
+                        new Date(habit.dateRange.start).getTime()) /
+                        (1000 * 60 * 60 * 24)}{" "}
+                      days
                     </Text>
-                    {selectedHabits[habit.id] && (
+                    {selectedHabits[habit._id] && (
                       <View style={styles.checkCircle}>
                         <Icon name="check" size={16} color="#FFFFFF" />
                       </View>
@@ -211,6 +229,29 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     marginTop: 40,
     marginLeft: 16,
+  },
+  headerText: {
+    flex: 1,
+    marginRight: 20,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+    backgroundColor: "#BC9680",
+    padding: 10,
+    borderRadius: 20,
+  },
+  subtitle: {
+    fontFamily: "Sora_400Regular",
+    fontSize: 16,
+    color: "#fff",
+  },
+  brainImage: {
+    width: 180,
+    height: 180,
+    resizeMode: "contain",
   },
   scrollView: {
     flex: 1,
@@ -318,7 +359,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    backgroundColor: "#fff",
+    backgroundColor: "#F7F4F2",
     borderRadius: 20,
     padding: 20,
     width: "90%",
