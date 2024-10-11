@@ -127,15 +127,11 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
           <View style={styles.headerText}>
-            <Text style={styles.title}>
-              Build Better Habits
-            </Text>
-            <Text style={styles.subtitle}>
-              Observe your thoughts and emotions.
-            </Text>
+            <Text style={styles.title}>Build Better Habits</Text>
+            <Text style={styles.subtitle}>One Step at a Time.</Text>
           </View>
           <Image
-            source={require("../../assets/images/header.png")}
+            source={require("../../assets/images/habitpng.png")}
             style={styles.brainImage}
           />
         </View>
@@ -242,14 +238,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#BC9680",
     padding: 10,
     borderRadius: 20,
+    width: "92%",
+    height: 225,
+    marginLeft: 14,
   },
   subtitle: {
     fontFamily: "Sora_400Regular",
     fontSize: 16,
     color: "#fff",
+    marginLeft: 17,
   },
   brainImage: {
-    width: 180,
+    width: 150,
     height: 180,
     resizeMode: "contain",
   },
