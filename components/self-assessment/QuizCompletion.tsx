@@ -30,13 +30,13 @@ const QuizCompletion: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <ImageBackground
-          source={require("../assets/images/bg1.png")}
+          source={require("../../assets/images/bg1.png")}
           style={styles.imageBackground}
           resizeMode="contain"
         ></ImageBackground>
         <View style={styles.imageContainer}>
           <Image
-            source={require("../assets/images/tick.png")}
+            source={require("../../assets/images/tick.png")}
             style={styles.tickImage}
           />
         </View>

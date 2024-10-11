@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 32,
     padding: 16,
     marginBottom: 16,
   },
@@ -150,6 +149,7 @@ const styles = StyleSheet.create({
   doctorRating: {
     fontSize: 14,
     marginTop: 8,
+    color: "#EAC612",
   },
   section: {
     padding: 16,

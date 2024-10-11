@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#FFD700",
+    color: "#EAC612",
     marginRight: 5,
   },
   reviewsText: {

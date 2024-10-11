@@ -8,10 +8,15 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useDoctors } from "../../hooks/useDoctors";
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 
 export default function Appointment() {
   const router = useRouter();
@@ -20,10 +25,12 @@ export default function Appointment() {
 
   const doctor = doctors.find((d) => d.id === id);
 
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [date, setDate] = useState<Date | null>(null);
+  const [time, setTime] = useState<Date | null>(null);
   const [fullName, setFullName] = useState("");
   const [notes, setNotes] = useState("");
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
 
   if (!doctor) return <Text>Doctor not found</Text>;
 
@@ -31,8 +38,8 @@ export default function Appointment() {
     // Prepare the appointment data
     const appointmentData = {
       doctorId: id,
-      date,
-      time,
+      date: date ? date.toISOString().split("T")[0] : null,
+      time: time ? time.toTimeString().split(" ")[0] : null,
       fullName,
       notes,
     };
@@ -43,82 +50,119 @@ export default function Appointment() {
     router.push(`/history`);
   };
 
+  const onDateChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      setDate(selectedDate);
+    }
+  };
+
+  const onTimeChange = (event: DateTimePickerEvent, selectedTime?: Date) => {
+    setShowTimePicker(false);
+    if (selectedTime) {
+      setTime(selectedTime);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.header}>
-          <Ionicons
-            name="arrow-back"
-            size={24}
-            color="black"
-            onPress={() => router.push(`/doctor-details/${doctor.id}`)}
-          />
-          <Text style={styles.title}>Appointment</Text>
-          <View style={styles.placeholder} />
-        </View>
-
-        <View style={styles.doctorCard}>
-          <Image source={doctor.image} style={styles.doctorImage} />
-          <View style={styles.doctorInfo}>
-            <Text style={styles.doctorName}>{doctor.name}</Text>
-            <View style={styles.horizontalLine} />
-            <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
-            <Text style={styles.doctorRating}>
-              ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
-            </Text>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardAvoidingView}
+      >
+        <ScrollView>
+          <View style={styles.header}>
+            <Ionicons
+              name="arrow-back"
+              size={24}
+              color="black"
+              onPress={() => router.push(`/doctor-details/${doctor.id}`)}
+            />
+            <Text style={styles.title}>Appointment</Text>
+            <View style={styles.placeholder} />
           </View>
-        </View>
 
-        <View style={styles.form}>
-          <Text style={styles.formTitle}>Appointment Details</Text>
-
-          <View style={styles.inputRow}>
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Date</Text>
-              <TextInput
-                style={styles.input}
-                value={date}
-                onChangeText={setDate}
-                placeholder="Select Date"
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Time</Text>
-              <TextInput
-                style={styles.input}
-                value={time}
-                onChangeText={setTime}
-                placeholder="Select Time"
-              />
+          <View style={styles.doctorCard}>
+            <Image source={doctor.image} style={styles.doctorImage} />
+            <View style={styles.doctorInfo}>
+              <Text style={styles.doctorName}>{doctor.name}</Text>
+              <View style={styles.horizontalLine} />
+              <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
+              <Text style={styles.doctorRating}>
+                ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
+              </Text>
             </View>
           </View>
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Full Name</Text>
-            <TextInput
-              style={styles.input}
-              value={fullName}
-              onChangeText={setFullName}
-              placeholder="Enter your full name"
-            />
-          </View>
+          <View style={styles.form}>
+            <Text style={styles.formTitle}>Appointment Details</Text>
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Notes</Text>
-            <TextInput
-              style={[styles.input, styles.notesInput]}
-              value={notes}
-              onChangeText={setNotes}
-              placeholder="Add any notes for the doctor"
-              multiline
-            />
-          </View>
-        </View>
-      </ScrollView>
+            <View style={styles.inputRow}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.label}>Date</Text>
+                <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+                  <Text style={styles.input}>
+                    {date ? date.toISOString().split("T")[0] : "Select Date"}
+                  </Text>
+                </TouchableOpacity>
+                {showDatePicker && (
+                  <DateTimePicker
+                    testID="datePicker"
+                    value={date || new Date()}
+                    mode="date"
+                    is24Hour={true}
+                    display="default"
+                    onChange={onDateChange}
+                  />
+                )}
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.label}>Time</Text>
+                <TouchableOpacity onPress={() => setShowTimePicker(true)}>
+                  <Text style={styles.input}>
+                    {time ? time.toTimeString().split(" ")[0] : "Select Time"}
+                  </Text>
+                </TouchableOpacity>
+                {showTimePicker && (
+                  <DateTimePicker
+                    testID="timePicker"
+                    value={time || new Date()}
+                    mode="time"
+                    is24Hour={true}
+                    display="default"
+                    onChange={onTimeChange}
+                  />
+                )}
+              </View>
+            </View>
 
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitButtonText}>Submit</Text>
-      </TouchableOpacity>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Full Name</Text>
+              <TextInput
+                style={styles.input}
+                value={fullName}
+                onChangeText={setFullName}
+                placeholder="Enter your full name"
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Notes</Text>
+              <TextInput
+                style={[styles.input, styles.notesInput]}
+                value={notes}
+                onChangeText={setNotes}
+                placeholder="Add any notes for the doctor"
+                multiline
+              />
+            </View>
+          </View>
+        </ScrollView>
+
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitButtonText}>Submit</Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -128,12 +172,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7F4F2",
   },
+  keyboardAvoidingView: {
+    flex: 1,
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     padding: 16,
-    marginTop: 32,
     marginBottom: 16,
   },
   title: {
@@ -177,6 +223,7 @@ const styles = StyleSheet.create({
   doctorRating: {
     fontSize: 14,
     marginTop: 8,
+    color: "#EAC612",
   },
   form: {
     padding: 16,
@@ -208,7 +255,7 @@ const styles = StyleSheet.create({
   },
   notesInput: {
     textAlignVertical: "top",
-    // height: 300,
+    height: 100,
   },
   submitButton: {
     backgroundColor: "#D2B48C",
@@ -221,5 +268,26 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });

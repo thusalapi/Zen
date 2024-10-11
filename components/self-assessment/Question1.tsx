@@ -13,6 +13,24 @@ import {
   Sora_700Bold,
 } from "@expo-google-fonts/sora";
 import AppLoading from "expo-app-loading";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type RootStackParamList = {
+  Question1: undefined;
+  Question2: undefined;
+  Question3: undefined;
+  Question4: undefined;
+  Question5: undefined;
+};
+
+type Question1NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Question1"
+>;
+
+type Props = {
+  navigation: Question1NavigationProp;
+};
 
 type Option = {
   id: number;
@@ -20,14 +38,13 @@ type Option = {
 };
 
 const options: Option[] = [
-  { id: 1, text: "Very happy" },
-  { id: 2, text: "Calm and relaxed" },
-  { id: 3, text: "Neutral" },
-  { id: 4, text: "Anxious or stressed" },
-  { id: 5, text: "Depressed or low" },
+  { id: 1, text: "Never" },
+  { id: 2, text: "Occasionally (1-2 times)" },
+  { id: 3, text: "Frequently (3-5 times)" },
+  { id: 4, text: "Almost daily" },
 ];
 
-const Question5: React.FC = () => {
+const Question1: React.FC<Props> = ({ navigation }) => {
   const [selectedOption, setSelectedOption] = useState<number>(2);
 
   let [fontsLoaded] = useFonts({
@@ -39,56 +56,61 @@ const Question5: React.FC = () => {
     return <AppLoading />;
   }
 
+  const handleNextPress = () => {
+    navigation.navigate("Question2");
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.content}>
+      <View style={styles.container}>
         <ImageBackground
-          source={require("../assets/images/bg2.png")}
+          source={require("../../assets/images/bg1.png")}
           style={styles.imageBackground}
           resizeMode="contain"
-        ></ImageBackground>
-        <View style={styles.progressContainer}>
-          {[1, 2, 3, 4, 5].map((num) => (
-            <View
-              key={num}
+        />
+        <View style={styles.content}>
+          <View style={styles.progressContainer}>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <View
+                key={num}
+                style={[
+                  styles.progressCircle,
+                  num === 1 && styles.activeProgressCircle,
+                ]}
+              >
+                {num === 1 && <Text style={styles.progressNumber}>1</Text>}
+              </View>
+            ))}
+          </View>
+
+          <Text style={styles.question}>
+            How often have you felt stressed or overwhelmed in the past week?
+          </Text>
+
+          {options.map((option) => (
+            <TouchableOpacity
+              key={option.id}
               style={[
-                styles.progressCircle,
-                num === 5 && styles.activeProgressCircle,
-                num === 1 && styles.completedProgressCircle,
-                num === 2 && styles.completedProgressCircle,
-                num === 3 && styles.completedProgressCircle,
-                num === 4 && styles.completedProgressCircle,
+                styles.optionButton,
+                selectedOption === option.id && styles.selectedOption,
               ]}
+              onPress={() => setSelectedOption(option.id)}
             >
-              {num === 5 && <Text style={styles.progressNumber}>5</Text>}
-            </View>
+              <Text style={styles.optionText}>{option.text}</Text>
+            </TouchableOpacity>
           ))}
-        </View>
 
-        <Text style={styles.question}>
-          How would you rate your current mood?
-        </Text>
-
-        {options.map((option) => (
-          <TouchableOpacity
-            key={option.id}
-            style={[
-              styles.optionButton,
-              selectedOption === option.id && styles.selectedOption,
-            ]}
-            onPress={() => setSelectedOption(option.id)}
-          >
-            <Text style={styles.optionText}>{option.text}</Text>
-          </TouchableOpacity>
-        ))}
-
-        <View style={styles.navigationContainer}>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>Finish</Text>
-          </TouchableOpacity>
+          <View style={styles.navigationContainer}>
+            <TouchableOpacity style={styles.navButton}>
+              <Text style={styles.navButtonText}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.navButton}
+              onPress={handleNextPress}
+            >
+              <Text style={styles.navButtonText}>Next</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -103,7 +125,7 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     width: "100%",
-    height: "59.5%",
+    height: "65.2%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -117,7 +139,7 @@ const styles = StyleSheet.create({
   progressContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 50,
+    marginBottom: 60,
     marginTop: 80,
   },
   progressCircle: {
@@ -145,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 80,
+    marginBottom: 100,
     fontFamily: "Sora_700Bold",
   },
   optionButton: {
@@ -185,4 +207,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Question5;
+export default Question1;
