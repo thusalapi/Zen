@@ -17,10 +17,10 @@ export default function TabLayout() {
         }}
       >
         <Tabs.Screen
-          name="selfAssessment"
+          name="index"
           options={{
-            headerShown: false,
             tabBarLabel: "",
+            headerShown: false,
             tabBarIcon: ({ color }) => (
               <Feather name="home" size={24} color={color} />
             ),
