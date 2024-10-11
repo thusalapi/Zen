@@ -88,9 +88,13 @@ export default function Appointment() {
               <Text style={styles.doctorName}>{doctor.name}</Text>
               <View style={styles.horizontalLine} />
               <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
-              <Text style={styles.doctorRating}>
-                ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
-              </Text>
+              <View style={styles.ratingContainer}>
+                <Text style={styles.ratingText}>★ {doctor.rating}/5.0</Text>
+                <Text style={styles.reviewsText}>
+                  {" "}
+                  ({doctor.reviews}+ reviews)
+                </Text>
+              </View>
             </View>
           </View>
 
@@ -220,10 +224,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "gray",
   },
-  doctorRating: {
+  ratingText: {
     fontSize: 14,
     marginTop: 8,
     color: "#EAC612",
+  },
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  reviewsText: {
+    marginTop: 8,
+    fontSize: 12,
+    color: "#666",
   },
   form: {
     padding: 16,

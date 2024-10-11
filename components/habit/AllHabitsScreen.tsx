@@ -23,8 +23,12 @@ interface HabitItemProps {
   isCompleted?: boolean;
 }
 
-const HabitItem: React.FC<HabitItemProps> = ({ habit, onComplete, onDelete, isCompleted }) => {
-
+const HabitItem: React.FC<HabitItemProps> = ({
+  habit,
+  onComplete,
+  onDelete,
+  isCompleted,
+}) => {
   const progressPercentage = habit.progress || 0;
 
   return (

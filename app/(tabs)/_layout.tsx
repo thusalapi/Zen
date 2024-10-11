@@ -35,6 +35,18 @@ export default function TabLayout() {
             ),
           }}
         />
+
+        <Tabs.Screen
+          name="habit"
+          options={{
+            headerShown: false,
+            tabBarLabel: "",
+            tabBarIcon: ({ color }) => (
+              <Feather name="target" size={24} color={color} />
+            ),
+          }}
+        />
+
         <Tabs.Screen
           name="doctors"
           options={{
@@ -45,14 +57,14 @@ export default function TabLayout() {
             ),
           }}
         />
-
         <Tabs.Screen
-          name="habit"
+          name="mood"
           options={{
             headerShown: false,
-            tabBarLabel: "",
+            title: "Mood",
+            headerShown: false,
             tabBarIcon: ({ color }) => (
-              <Feather name="target" size={24} color={color} />
+              <Feather name="plus" size={24} color={color} />
             ),
           }}
         />

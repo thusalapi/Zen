@@ -112,7 +112,7 @@ const HistoryScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F7F4F2",
+    backgroundColor: "#FFF1E8",
     padding: 20,
   },
   header: {
