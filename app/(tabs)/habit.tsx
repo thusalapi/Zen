@@ -7,7 +7,7 @@ import CreateNewHabitForm from "@/components/habit/CreateNewHabitForm";
 import RemindersScreen from "@/components/habit/ReminderScreen";
 import HabitNavigation from "@/components/habit/HabitNavigation";
 
-export default function SigninScreen() {
+export default function habit() {
   return (
     <>
       <HabitNavigation />

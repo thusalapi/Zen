@@ -63,7 +63,7 @@ const DoctorDetails: React.FC<DoctorDetailsProps> = ({
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.title}>{`${title} | ${organization}`}</Text>
           <View style={styles.rating}>
-            <Ionicons name="star" size={16} color="#FFD700" />
+            <Ionicons name="star" size={16} color="#EAC612" />
             <Text
               style={styles.ratingText}
             >{`${rating} / 5.0 (${reviewCount}+ reviews)`}</Text>

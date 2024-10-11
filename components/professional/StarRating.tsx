@@ -18,7 +18,7 @@ export default function StarRating({
           <Ionicons
             name={star <= rating ? "star" : "star-outline"}
             size={40}
-            color={star <= rating ? "#FFD700" : "#000"}
+            color={star <= rating ? "#EAC612" : "#000"}
           />
         </TouchableOpacity>
       ))}

@@ -20,9 +20,10 @@ export default function DoctorCard({ doctor }: Props) {
         <Text style={styles.name}>{doctor.name}</Text>
         <View style={styles.horizontalLine} />
         <Text style={styles.specialty}>{doctor.specialty}</Text>
-        <Text style={styles.rating}>
-          ★ {doctor.rating}/5.0 ({doctor.reviews}+ reviews)
-        </Text>
+        <View style={styles.ratingContainer}>
+          <Text style={styles.ratingText}>★ {doctor.rating}/5.0</Text>
+          <Text style={styles.reviewsText}>({doctor.reviews}+ reviews)</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -59,8 +60,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "gray",
   },
-  rating: {
-    fontSize: 14,
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 8,
+  },
+  ratingText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#EAC612",
+    marginRight: 5,
+  },
+  reviewsText: {
+    fontSize: 12,
+    color: "#666",
   },
 });

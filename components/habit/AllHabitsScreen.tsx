@@ -23,7 +23,12 @@ interface HabitItemProps {
   isCompleted?: boolean;
 }
 
-const HabitItem: React.FC<HabitItemProps> = ({ habit, onComplete, onDelete, isCompleted }) => {
+const HabitItem: React.FC<HabitItemProps> = ({
+  habit,
+  onComplete,
+  onDelete,
+  isCompleted,
+}) => {
   const progressPercentage = habit.progress || 0;
 
   return (
@@ -35,25 +40,25 @@ const HabitItem: React.FC<HabitItemProps> = ({ habit, onComplete, onDelete, isCo
       {!isCompleted && (
         <View style={styles.habitActions}>
           <TouchableOpacity onPress={onComplete}>
-            <Icon name="checkmark-circle" size={24} color="#4A4A4A" />
+            <Icon name="checkmark-circle" size={24} color="#8FD14F" />
           </TouchableOpacity>
           <TouchableOpacity onPress={onDelete}>
-            <Icon name="close-circle" size={24} color="#4A4A4A" />
+            <Icon name="close-circle" size={24} color="#D91656" />
           </TouchableOpacity>
         </View>
       )}
-      {isCompleted && (
+      {/* {isCompleted && (
         <View style={styles.progressBar}>
           <View
-            style={[styles.progressFill, { width: `${progressPercentage}%` }]}
+            style={[styles.progressFill, { width: `${50}%` }]}
           />
         </View>
-      )}
+      )} */}
     </View>
   );
 };
 
-const AllHabitsScreen = () => {
+const AllHabitsScreen = ({ navigation }: { navigation: any }) => {
   const [currentHabits, setCurrentHabits] = useState([
     { id: 1, name: "Be healthy", duration: "2 month" },
     { id: 2, name: "Be healthy", duration: "2 month" },
@@ -66,21 +71,26 @@ const AllHabitsScreen = () => {
     { id: 6, name: "Be healthy", duration: "2 month", progress: 50 },
   ]);
 
-  const completeHabit = (habit) => {
+  const completeHabit = (habit: any) => {
     setCurrentHabits(currentHabits.filter((h) => h.id !== habit.id));
     setCompletedHabits([...completedHabits, { ...habit, progress: 0 }]);
   };
 
-  const deleteHabit = (habit) => {
+  const deleteHabit = (habit: any) => {
     setCurrentHabits(currentHabits.filter((h) => h.id !== habit.id));
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <Text style={styles.title}>All Habits</Text>
+      <Text style={styles.title}>All Habits</Text>
 
-        <Text style={styles.sectionTitle}>Current</Text>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Habits</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Text style={styles.viewAllText}>View current→</Text>
+          </TouchableOpacity>
+        </View>
         {currentHabits.map((habit) => (
           <HabitItem
             key={habit.id}
@@ -96,7 +106,12 @@ const AllHabitsScreen = () => {
         ))}
       </ScrollView>
       <TouchableOpacity style={styles.addButton}>
-        <Icon name="add" size={24} color="#FFFFFF" />
+        <Icon
+          onPress={() => navigation.navigate("habitform")}
+          name="add"
+          size={24}
+          color="#FFFFFF"
+        />
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -114,24 +129,33 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#4A4A4A",
-    marginBottom: 24,
+    color: "#4F3422",
+    marginBottom: 4,
+    marginTop: 40,
+    marginLeft: 16,
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
   },
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#4A4A4A",
-    marginTop: 24,
-    marginBottom: 16,
+    color: "#4F3422",
+    marginTop: 3,
+    marginLeft: 2,
+    marginBottom: 10,
   },
   habitItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#E0E0E0",
+    backgroundColor: "#293754",
     borderRadius: 12,
     padding: 16,
-    marginBottom: 12,
+    marginBottom: 10,
   },
   completedHabitItem: {
     backgroundColor: "#2E7D32",
@@ -142,11 +166,11 @@ const styles = StyleSheet.create({
   habitName: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#4A4A4A",
+    color: "#FFFFFF",
   },
   habitDuration: {
     fontSize: 14,
-    color: "#4A4A4A",
+    color: "#FFFFFF",
   },
   habitActions: {
     flexDirection: "row",
@@ -162,7 +186,7 @@ const styles = StyleSheet.create({
   },
   progressFill: {
     height: "100%",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#D91656",
   },
   addButton: {
     position: "absolute",
@@ -171,10 +195,15 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: "#4A4A4A",
+    backgroundColor: "#4F3422",
     justifyContent: "center",
     alignItems: "center",
     elevation: 4,
+  },
+  viewAllText: {
+    fontSize: 16,
+    color: "#4F3422",
+    marginBottom: 10,
   },
 });
 
