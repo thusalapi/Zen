@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     marginBottom: 20 * widthScale,
   },
   backButtonText: {
-    fontSize: 24 * widthScale,
+    fontSize: 32 * widthScale,
     fontWeight: '600',
     color: '#4F3422',
   },
@@ -125,9 +125,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    height: '85%',
   },
   title: {
-    fontSize: 24 * widthScale,
+    fontSize: 25 * widthScale,
     fontWeight: '700',
     color: '#4F3422',
     marginBottom: 10 * widthScale,
@@ -142,9 +143,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#BC9680',
-    padding: 15 * widthScale,
+    padding: 20 * widthScale,
     borderRadius: 15 * widthScale,
-    marginBottom: 20 * widthScale,
+    marginBottom: 40 * widthScale,
   },
   progressTextContainer: {
     marginLeft: 15 * widthScale,
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
   statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20 * widthScale,
+    marginBottom: 40 * widthScale,
   },
   statBox: {
     backgroundColor: '#BC9680',
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
   },
   seekHelpContainer: {
     backgroundColor: '#BC9680',
-    padding: 20 * widthScale,
+    padding: 40 * widthScale,
     borderRadius: 15 * widthScale,
     alignItems: 'center',
   },

@@ -26,15 +26,6 @@ export default function TabLayout() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="more"
-          options={{
-            tabBarLabel: "",
-            tabBarIcon: ({ color }) => (
-              <Feather name="book" size={24} color={color} />
-            ),
-          }}
-        />
                 <Tabs.Screen
           name="mood"
           options={{
