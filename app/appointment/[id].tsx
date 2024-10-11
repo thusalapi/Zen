@@ -14,7 +14,9 @@ import {
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useDoctors } from "../../hooks/useDoctors";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 
 export default function Appointment() {
   const router = useRouter();
@@ -23,8 +25,8 @@ export default function Appointment() {
 
   const doctor = doctors.find((d) => d.id === id);
 
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
+  const [date, setDate] = useState<Date | null>(null);
+  const [time, setTime] = useState<Date | null>(null);
   const [fullName, setFullName] = useState("");
   const [notes, setNotes] = useState("");
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -36,8 +38,8 @@ export default function Appointment() {
     // Prepare the appointment data
     const appointmentData = {
       doctorId: id,
-      date: date.toISOString().split("T")[0],
-      time: time.toTimeString().split(" ")[0],
+      date: date ? date.toISOString().split("T")[0] : null,
+      time: time ? time.toTimeString().split(" ")[0] : null,
       fullName,
       notes,
     };
@@ -48,16 +50,18 @@ export default function Appointment() {
     router.push(`/history`);
   };
 
-  const onDateChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShowDatePicker(Platform.OS === "ios");
-    setDate(currentDate);
+  const onDateChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      setDate(selectedDate);
+    }
   };
 
-  const onTimeChange = (event, selectedTime) => {
-    const currentTime = selectedTime || time;
-    setShowTimePicker(Platform.OS === "ios");
-    setTime(currentTime);
+  const onTimeChange = (event: DateTimePickerEvent, selectedTime?: Date) => {
+    setShowTimePicker(false);
+    if (selectedTime) {
+      setTime(selectedTime);
+    }
   };
 
   return (
@@ -98,17 +102,37 @@ export default function Appointment() {
                 <Text style={styles.label}>Date</Text>
                 <TouchableOpacity onPress={() => setShowDatePicker(true)}>
                   <Text style={styles.input}>
-                    {date.toISOString().split("T")[0]}
+                    {date ? date.toISOString().split("T")[0] : "Select Date"}
                   </Text>
                 </TouchableOpacity>
+                {showDatePicker && (
+                  <DateTimePicker
+                    testID="datePicker"
+                    value={date || new Date()}
+                    mode="date"
+                    is24Hour={true}
+                    display="default"
+                    onChange={onDateChange}
+                  />
+                )}
               </View>
               <View style={styles.inputContainer}>
                 <Text style={styles.label}>Time</Text>
                 <TouchableOpacity onPress={() => setShowTimePicker(true)}>
                   <Text style={styles.input}>
-                    {time.toTimeString().split(" ")[0]}
+                    {time ? time.toTimeString().split(" ")[0] : "Select Time"}
                   </Text>
                 </TouchableOpacity>
+                {showTimePicker && (
+                  <DateTimePicker
+                    testID="timePicker"
+                    value={time || new Date()}
+                    mode="time"
+                    is24Hour={true}
+                    display="default"
+                    onChange={onTimeChange}
+                  />
+                )}
               </View>
             </View>
 
@@ -138,28 +162,6 @@ export default function Appointment() {
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Text style={styles.submitButtonText}>Submit</Text>
         </TouchableOpacity>
-
-        {showDatePicker && (
-          <DateTimePicker
-            testID="datePicker"
-            value={date}
-            mode="date"
-            is24Hour={true}
-            display="default"
-            onChange={onDateChange}
-          />
-        )}
-
-        {showTimePicker && (
-          <DateTimePicker
-            testID="timePicker"
-            value={time}
-            mode="time"
-            is24Hour={true}
-            display="default"
-            onChange={onTimeChange}
-          />
-        )}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -221,6 +223,7 @@ const styles = StyleSheet.create({
   doctorRating: {
     fontSize: 14,
     marginTop: 8,
+    color: "#EAC612",
   },
   form: {
     padding: 16,
@@ -265,5 +268,26 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });

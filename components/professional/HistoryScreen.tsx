@@ -34,7 +34,7 @@ const DoctorCard: React.FC<{ doctor: DoctorProps }> = ({ doctor }) => (
         style={styles.doctorTitle}
       >{`${doctor.title} | ${doctor.organization}`}</Text>
       <View style={styles.ratingContainer}>
-        <Ionicons name="star" size={16} color="#FFD700" />
+        <Ionicons name="star" size={16} color="#EAC612" />
         <Text
           style={styles.rating}
         >{`${doctor.rating} / 5.0 (${doctor.reviewCount}+ reviews)`}</Text>
