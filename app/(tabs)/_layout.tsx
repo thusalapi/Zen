@@ -26,9 +26,10 @@ export default function TabLayout() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="more"
+                <Tabs.Screen
+          name="mood"
           options={{
+            headerShown: false,
             tabBarLabel: "",
             tabBarIcon: ({ color }) => (
               <Feather name="book" size={24} color={color} />
@@ -57,17 +58,7 @@ export default function TabLayout() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="mood"
-          options={{
-            headerShown: false,
-            title: "Mood",
-            headerShown: false,
-            tabBarIcon: ({ color }) => (
-              <Feather name="plus" size={24} color={color} />
-            ),
-          }}
-        />
+
       </Tabs>
     </>
   );
