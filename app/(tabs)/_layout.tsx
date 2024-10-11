@@ -35,16 +35,6 @@ export default function TabLayout() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="doctors"
-          options={{
-            tabBarLabel: "",
-            headerShown: false,
-            tabBarIcon: ({ color }) => (
-              <Feather name="users" size={24} color={color} />
-            ),
-          }}
-        />
 
         <Tabs.Screen
           name="habit"
@@ -53,6 +43,17 @@ export default function TabLayout() {
             tabBarLabel: "",
             tabBarIcon: ({ color }) => (
               <Feather name="target" size={24} color={color} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="doctors"
+          options={{
+            tabBarLabel: "",
+            headerShown: false,
+            tabBarIcon: ({ color }) => (
+              <Feather name="users" size={24} color={color} />
             ),
           }}
         />

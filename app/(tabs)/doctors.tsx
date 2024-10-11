@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import SearchBar from "@/components/professional/SearchBar";
 import ViewAllHeader from "@/components/professional/ViewAllHeader";
 import DoctorList from "@/components/professional/DoctorsList";
@@ -19,9 +19,17 @@ export default function ProfessionalSupport() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.minititle}>Hi Patient</Text>
-      <Text style={styles.title}>Let's Find</Text>
-      <Text style={styles.title2}>Your Doctor</Text>
+      <View style={styles.headerContainer}>
+        <View style={styles.textContainer}>
+          <Text style={styles.minititle}>Hi Patient</Text>
+          <Text style={styles.title}>Let's Find</Text>
+          <Text style={styles.title2}>Your Doctor</Text>
+        </View>
+        <Image
+          source={require("../../assets/images/dp.png")}
+          style={styles.profilePicture}
+        />
+      </View>
       <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
       <ViewAllHeader title="Recommended" />
       <DoctorList doctors={filteredDoctors} />
@@ -32,8 +40,20 @@ export default function ProfessionalSupport() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 20,
+    paddingBottom: 0,
     backgroundColor: "#F7F4F2",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  textContainer: {
+    flex: 1,
   },
   title: {
     fontSize: 32,
@@ -42,10 +62,14 @@ const styles = StyleSheet.create({
   title2: {
     fontSize: 32,
     fontWeight: "bold",
-    marginBottom: 20,
   },
   minititle: {
     fontSize: 24,
     fontWeight: "light",
+  },
+  profilePicture: {
+    width: 92,
+    height: 92,
+    borderRadius: 30,
   },
 });
