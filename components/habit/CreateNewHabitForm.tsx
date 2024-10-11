@@ -115,15 +115,7 @@ const CreateNewHabitForm = ({ navigation }: { navigation: NavigationProp<any> })
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text style={styles.title}>Create New Habit</Text>
-          <TouchableOpacity>
-            <Icon
-              name="bell-o"
-              onPress={() => navigation.navigate("reminder")}
-              size={24}
-              style={{ marginTop: 20 }}
-              color="#000"
-            />
-          </TouchableOpacity>
+         
           <TouchableOpacity>
             <Icon
               name="close"

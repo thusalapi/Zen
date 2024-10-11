@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import axios from "axios";
+import FontAwesomeIcons from "react-native-vector-icons/FontAwesome";
 
 const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -109,6 +110,19 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.sectionMainHeader}>
+        <Text style={styles.title}>My Habits</Text>
+        <TouchableOpacity>
+          <FontAwesomeIcons
+            name="bell-o"
+            onPress={() => navigation.navigate("reminder")}
+            size={24}
+            style={{ marginTop: 45, marginRight: 20 }}
+            color="#000"
+          />
+        </TouchableOpacity>
+      </View>
+
       <ScrollView style={styles.scrollView}>
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
@@ -190,13 +204,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7F5F2",
   },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#4F3422",
+    marginBottom: 4,
+    marginTop: 40,
+    marginLeft: 16,
+  },
   scrollView: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 5,
   },
   section: {
     marginBottom: 20,
     paddingHorizontal: 20,
+  },
+  sectionMainHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
   },
   sectionHeader: {
     flexDirection: "row",
