@@ -8,6 +8,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   Dimensions,
+  ImageBackground, // Import ImageBackground
+  Image,
 } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -40,80 +42,94 @@ const MoodSelectionScreen: React.FC<MoodSelectionProps> = ({ navigation }) => {
   ];
 
   return (
-    <KeyboardAvoidingView 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
+    <ImageBackground 
+      source={require('././../../assets/images/fakebg.png')} // Update to your background image
+      style={styles.background}
+      resizeMode="cover" // Adjust to 'contain' if you want the entire image to be visible
     >
-      <Text style={styles.title}>Tell us how you{'\n'}are feeling{'\n'}today?</Text>
-      
-      <View style={styles.buttonsContainer}>
-        {moodOptions.map((mood, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[
-              styles.moodButton,
-              selectedMood === mood && styles.selectedMoodButton
-            ]}
-            onPress={() => setSelectedMood(mood)}
-          >
-            <Text style={[
-              styles.moodButtonText,
-              selectedMood === mood && styles.selectedMoodButtonText
-            ]}>
-              {mood}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container}
+      >
+        <Text style={styles.title}>Tell us how you{'\n'}are feeling{'\n'}today?</Text>
+        
+        <View style={styles.buttonsContainer}>
+          {moodOptions.map((mood, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.moodButton,
+                selectedMood === mood && styles.selectedMoodButton
+              ]}
+              onPress={() => setSelectedMood(mood)}
+            >
+              <Text style={[
+                styles.moodButtonText,
+                selectedMood === mood && styles.selectedMoodButtonText
+              ]}>
+                {mood}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
-      <View style={styles.bottomContainer}>
-        <Text style={styles.detailsTitle}>Wanna share more deets?{'\n'}Type 'em here, bestie!</Text>
-        <TextInput
-          style={styles.textInput}
-          multiline
-          numberOfLines={4}
-          placeholder="....."
-          placeholderTextColor="#8D6E63"
-          value={additionalDetails}
-          onChangeText={setAdditionalDetails}
-        />
-        <TouchableOpacity 
-          style={styles.nextButton}
-          onPress={() => navigation.navigate('PepTalk')}
-        >
-          <View style={styles.nextButtonInner} />
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+        <View style={styles.bottomContainer}>
+          <Text style={styles.detailsTitle}>Wanna share more deets?{'\n'}Type 'em here, bestie!</Text>
+          <TextInput
+            style={styles.textInput}
+            multiline
+            numberOfLines={4}
+            placeholder="....."
+            placeholderTextColor="#8D6E63"
+            value={additionalDetails}
+            onChangeText={setAdditionalDetails}
+          />
+          <TouchableOpacity 
+            style={styles.nextButton}
+            onPress={() => navigation.navigate('pepTalk')}
+          >
+            <Image 
+              source={require('././../../assets/images/btn.png')} // Update the path to your button image
+              style={styles.nextButtonImage} 
+            />
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    justifyContent: 'center', // Center the content vertically
+  },
   container: {
     flex: 1,
-    backgroundColor: '#FFE4D6',
+    backgroundColor: 'transparent', // Make the container transparent to see the background
     paddingTop: 60 * heightScale,
   },
   title: {
     fontSize: 32 * widthScale,
     fontWeight: '700',
-    color: '#5D4037',
-    textAlign: 'left',
+    color: '#4F3422',
+    textAlign: 'center',
     paddingHorizontal: 20 * widthScale,
     marginBottom: 30 * heightScale,
   },
   buttonsContainer: {
-    paddingHorizontal: 20 * widthScale,
+    paddingHorizontal: 60 * widthScale,
+    paddingVertical: 20 * heightScale,
   },
   moodButton: {
     backgroundColor: 'white',
     borderRadius: 25 * widthScale,
-    paddingVertical: 15 * heightScale,
-    paddingHorizontal: 20 * widthScale,
-    marginBottom: 15 * heightScale,
+    paddingVertical: 5 * heightScale,
+    paddingHorizontal: 10 * widthScale,
+    marginBottom: 35 * heightScale,
   },
   selectedMoodButton: {
-    backgroundColor: '#8D6E63',
+    backgroundColor: '#BC9680',
   },
   moodButtonText: {
     fontSize: 18 * widthScale,
@@ -127,11 +143,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     width: '100%',
+    paddingBottom: 50 * heightScale,
   },
   detailsTitle: {
-    fontSize: 24 * widthScale,
+    fontSize: 20 * widthScale,
     fontWeight: '600',
-    color: '#5D4037',
+    color: '#4F3422',
     paddingHorizontal: 20 * widthScale,
     marginBottom: 10 * heightScale,
   },
@@ -142,7 +159,7 @@ const styles = StyleSheet.create({
     paddingTop: 15 * heightScale,
     paddingBottom: 15 * heightScale,
     marginHorizontal: 20 * widthScale,
-    marginBottom: 20 * heightScale,
+    marginBottom: 25 * heightScale,
     fontSize: 16 * widthScale,
     color: '#5D4037',
     height: 100 * heightScale,
@@ -154,16 +171,12 @@ const styles = StyleSheet.create({
     right: 20 * widthScale,
     width: 40 * widthScale,
     height: 40 * widthScale,
-    borderRadius: 20 * widthScale,
-    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  nextButtonInner: {
-    width: 20 * widthScale,
-    height: 20 * heightScale,
-    borderRadius: 10 * widthScale,
-    backgroundColor: '#E0E0E0',
+  nextButtonImage: {
+    width: 40 * widthScale, // Adjust size as needed
+    height: 40 * heightScale, // Adjust size as needed
   },
 });
 

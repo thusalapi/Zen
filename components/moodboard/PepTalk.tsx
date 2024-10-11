@@ -48,24 +48,25 @@ const PepTalkScreen: React.FC<PepTalkScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFE4D6',
+    backgroundColor: '#F7F4F2',
     paddingTop: 60 * heightScale,
     paddingHorizontal: 20 * widthScale,
+    alignItems: 'center',
   },
   title: {
     fontSize: 32 * widthScale,
     fontWeight: '700',
-    color: '#5D4037',
+    color: '#4F3422',
     marginBottom: 16 * heightScale,
   },
   message: {
     fontSize: 20 * widthScale,
     lineHeight: 28 * heightScale,
-    color: '#8D6E63',
+    color: '#BC9680',
     marginBottom: 24 * heightScale,
   },
   illustration: {
-    width: '100%',
+    width: '200%',
     height: 400 * heightScale,
     resizeMode: 'contain',
   },

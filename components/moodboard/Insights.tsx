@@ -93,22 +93,6 @@ const MoodInsights: React.FC<MoodInsightsProps> = ({ navigation }) => {
           </Text>
         </View>
       </View>
-
-      <View style={styles.navBar}>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}>🏠</Text>
-          <Text style={styles.navText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}>📊</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}>🔍</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}>👤</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -116,7 +100,7 @@ const MoodInsights: React.FC<MoodInsightsProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFE4D6',
+    backgroundColor: '#F7F4F2',
     paddingTop: 60 * widthScale,
   },
   backButton: {
@@ -126,7 +110,7 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: 24 * widthScale,
     fontWeight: '600',
-    color: '#5D4037',
+    color: '#4F3422',
   },
   mainCard: {
     backgroundColor: 'white',
@@ -145,27 +129,30 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24 * widthScale,
     fontWeight: '700',
-    color: '#5D4037',
+    color: '#4F3422',
     marginBottom: 10 * widthScale,
   },
   subtitle: {
     fontSize: 18 * widthScale,
-    color: '#8D6E63',
+    color: '#4F3422',
     marginBottom: 20 * widthScale,
+    fontWeight: '500',
   },
   progressContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#DDBEA9',
+    backgroundColor: '#BC9680',
     padding: 15 * widthScale,
     borderRadius: 15 * widthScale,
     marginBottom: 20 * widthScale,
   },
   progressTextContainer: {
     marginLeft: 15 * widthScale,
+    fontWeight: 'bold',
   },
   progressText: {
-    color: '#5D4037',
+    color: '#4F3422',
+    fontWeight: 'bold',
     fontSize: 16 * widthScale,
   },
   statsContainer: {
@@ -174,7 +161,7 @@ const styles = StyleSheet.create({
     marginBottom: 20 * widthScale,
   },
   statBox: {
-    backgroundColor: '#DDBEA9',
+    backgroundColor: '#BC9680',
     padding: 15 * widthScale,
     borderRadius: 15 * widthScale,
     alignItems: 'center',
@@ -187,33 +174,35 @@ const styles = StyleSheet.create({
   statNumber: {
     fontSize: 24 * widthScale,
     fontWeight: '700',
-    color: '#5D4037',
+    color: '#4F3422',
   },
   statLabel: {
     fontSize: 16 * widthScale,
-    color: '#5D4037',
+    fontWeight: 'bold',
+    color: '#4F3422',
   },
   seekHelpContainer: {
-    backgroundColor: '#DDBEA9',
+    backgroundColor: '#BC9680',
     padding: 20 * widthScale,
     borderRadius: 15 * widthScale,
     alignItems: 'center',
   },
   wavyLine: {
     height: 2,
-    backgroundColor: '#5D4037',
+    backgroundColor: '#4F3422',
     width: '80%',
     marginBottom: 10 * widthScale,
   },
   seekHelpTitle: {
     fontSize: 24 * widthScale,
     fontWeight: '700',
-    color: '#5D4037',
+    color: '#4F3422',
     marginBottom: 5 * widthScale,
   },
   seekHelpText: {
     fontSize: 16 * widthScale,
-    color: '#5D4037',
+    color: '#4F3422',
+    fontWeight: 'bold',
     textAlign: 'center',
   },
   navBar: {
