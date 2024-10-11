@@ -64,4 +64,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
     color: "#EAC612",
   },
+  reviews: {
+    fontSize: 14,
+    color: "gray",
+  },
 });
