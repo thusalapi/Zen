@@ -56,15 +56,15 @@ const HabitItem: React.FC<HabitItemProps> = ({ habit, onComplete, onDelete, isCo
 
 const AllHabitsScreen = ({ navigation }: { navigation: any }) => {
   const [currentHabits, setCurrentHabits] = useState([
-    { id: 1, name: "Be healthy", duration: "2 month" },
-    { id: 2, name: "Be healthy", duration: "2 month" },
-    { id: 3, name: "Be healthy", duration: "2 month" },
-    { id: 4, name: "Be healthy", duration: "2 month" },
+    { id: 1, name: "Study Art", duration: "6 month" },
+    { id: 2, name: "Study Art", duration: "6 month" },
+    { id: 3, name: "Drink water", duration: "T F" },
+    { id: 4, name: "Eat", duration: "F W" },
   ]);
 
   const [completedHabits, setCompletedHabits] = useState([
     { id: 5, name: "Be healthy", duration: "2 month", progress: 75 },
-    { id: 6, name: "Be healthy", duration: "2 month", progress: 50 },
+    { id: 6, name: "Walk", duration: "S M", progress: 50 },
   ]);
 
   const completeHabit = (habit: any) => {
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#4F3422",
+    color: "#151515",
     marginBottom: 4,
     marginTop: 40,
     marginLeft: 16,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#4F3422",
+    color: "#151515",
     marginTop: 3,
     marginLeft: 2,
     marginBottom: 10,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#293754",
+    backgroundColor: "#4F3422",
     borderRadius: 12,
     padding: 16,
     marginBottom: 10,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   },
   viewAllText: {
     fontSize: 16,
-    color: "#4F3422",
+    color: "#151515",
     marginBottom: 10,
   },
 });

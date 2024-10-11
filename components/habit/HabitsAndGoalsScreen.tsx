@@ -47,8 +47,8 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
   console.log(habits);
 
   const goals = [
-    { id: 1, name: "Be healthy", duration: "2 month", color: "#A8D8D8" },
-    { id: 2, name: "Be healthy", duration: "2 month", color: "#B8E0B8" },
+    { id: 1, name: "Study Art", duration: "6 days", color: "#A8D8D8" },
+    { id: 2, name: "Run", duration: "S M", color: "#B8E0B8" },
     { id: 3, name: "Be healthy", duration: "2 month", color: "#A8D8D8" },
   ];
 
@@ -233,12 +233,12 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F7F5F2",
+    backgroundColor: "#F7F4F2",
   },
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#4F3422",
+    color: "#151515",
     marginBottom: 4,
     marginTop: 40,
     marginLeft: 16,
@@ -293,14 +293,14 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#4F3422",
+    color: "#151515",
   },
   viewAllText: {
     fontSize: 16,
-    color: "#4F3422",
+    color: "#151515",
   },
   habitItem: {
-    backgroundColor: "#293754",
+    backgroundColor: "#4F3422",
     borderRadius: 10,
     padding: 15,
     marginBottom: 10,
