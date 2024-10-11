@@ -24,7 +24,7 @@ type PepTalkScreenProps = {
 const PepTalkScreen: React.FC<PepTalkScreenProps> = ({ navigation }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.replace('NextScreen'); // Replace with your actual next screen name
+      navigation.replace('dash'); // Replace with your actual next screen name
     }, 3000);
 
     return () => clearTimeout(timer);

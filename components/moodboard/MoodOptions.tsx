@@ -86,7 +86,7 @@ const MoodSelectionScreen: React.FC<MoodSelectionProps> = ({ navigation }) => {
           />
           <TouchableOpacity 
             style={styles.nextButton}
-            onPress={() => navigation.navigate('pepTalk')}
+            onPress={() => navigation.navigate('PepTalk')}
           >
             <Image 
               source={require('././../../assets/images/btn.png')} // Update the path to your button image

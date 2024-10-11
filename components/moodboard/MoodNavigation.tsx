@@ -22,19 +22,14 @@ const MoodNavigation = () => {
         component={PepTalkScreen}
       />
       <Stack.Screen
-        name="MoodJournal"
+        name="dash"
         options={{ headerShown: false }}
         component={MoodJournal}
       />
       <Stack.Screen
-        name="MoodInsights"
+        name="insight"
         options={{ headerShown: false }}
         component={MoodInsights}
-      />
-      <Stack.Screen
-        name="MoodSelectorCarousel" // Example of adding this screen if needed
-        options={{ headerShown: false }}
-        component={MoodSelectorCarousel}
       />
     </Stack.Navigator>
   );
