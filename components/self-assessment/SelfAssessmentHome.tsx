@@ -26,6 +26,7 @@ type RootStackParamList = {
   Question3: undefined;
   Question4: undefined;
   Question5: undefined;
+  ExercisePage: undefined;
 };
 
 type SelfAssessmentHomeScreenNavigationProp = StackNavigationProp<
@@ -70,6 +71,10 @@ const SelfAssessmentHome: React.FC = () => {
     navigation.navigate("Question1");
   };
 
+  const handleNavigateToExercise = () => {
+    navigation.navigate("ExercisePage");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -97,26 +102,34 @@ const SelfAssessmentHome: React.FC = () => {
 
         <Text style={styles.sectionTitle}>Recommended Exercises</Text>
 
-        <ExerciseCard
-          title="Deep Breathing"
-          duration="(20 minutes)"
-          imageSource={require("../../assets/images/exercise1.png")}
-        />
-        <ExerciseCard
-          title="Visualization"
-          duration="(20 minutes)"
-          imageSource={require("../../assets/images/exercise2.png")}
-        />
-        <ExerciseCard
-          title="Mindful Walk"
-          duration="(20 minutes)"
-          imageSource={require("../../assets/images/exercise3.png")}
-        />
-        <ExerciseCard
-          title="Gratitude Pause"
-          duration="(20 minutes)"
-          imageSource={require("../../assets/images/exercise4.png")}
-        />
+        <TouchableOpacity onPress={handleNavigateToExercise}>
+          <ExerciseCard
+            title="Deep Breathing"
+            duration="(20 minutes)"
+            imageSource={require("../../assets/images/exercise1.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleNavigateToExercise}>
+          <ExerciseCard
+            title="Visualization"
+            duration="(20 minutes)"
+            imageSource={require("../../assets/images/exercise2.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleNavigateToExercise}>
+          <ExerciseCard
+            title="Mindful Walk"
+            duration="(20 minutes)"
+            imageSource={require("../../assets/images/exercise3.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleNavigateToExercise}>
+          <ExerciseCard
+            title="Gratitude Pause"
+            duration="(20 minutes)"
+            imageSource={require("../../assets/images/exercise4.png")}
+          />
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

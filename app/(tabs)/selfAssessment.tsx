@@ -2,7 +2,7 @@ import Navigator from "@/components/self-assessment/Navigator";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-export default function SigninScreen() {
+export default function SelfAssessment() {
   return (
     <>
       <Navigator />
