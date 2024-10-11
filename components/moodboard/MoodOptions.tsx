@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
+
 const { width, height } = Dimensions.get('window');
 const iPHONE_14_PRO_WIDTH = 393;
 const iPHONE_14_PRO_HEIGHT = 852;
@@ -51,7 +52,8 @@ const MoodSelectionScreen: React.FC<MoodSelectionProps> = ({ navigation }) => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
       >
-        <Text style={styles.title}>Tell us how you{'\n'}are feeling{'\n'}today?</Text>
+        <Text style={styles.title}>Tell us</Text>
+        <Text style={styles.title2}> How are feeling today?</Text>
         
         <View style={styles.buttonsContainer}>
           {moodOptions.map((mood, index) => (
@@ -110,23 +112,33 @@ const styles = StyleSheet.create({
     paddingTop: 60 * heightScale,
   },
   title: {
+    fontSize: 24 * widthScale,
+    //fontWeight: '700',
+    color: '#4F3422',
+    textAlign: 'left',
+    paddingHorizontal: 25 * widthScale,
+    //marginBottom: 30 * heightScale,
+  },
+   title2: {
     fontSize: 32 * widthScale,
     fontWeight: '700',
     color: '#4F3422',
-    textAlign: 'center',
+    textAlign: 'left',
     paddingHorizontal: 20 * widthScale,
     marginBottom: 30 * heightScale,
   },
   buttonsContainer: {
     paddingHorizontal: 60 * widthScale,
-    paddingVertical: 20 * heightScale,
+    paddingVertical: 10 * heightScale,
+    alignItems: 'center',
   },
   moodButton: {
     backgroundColor: 'white',
     borderRadius: 25 * widthScale,
-    paddingVertical: 5 * heightScale,
+    paddingVertical: 10 * heightScale,
     paddingHorizontal: 10 * widthScale,
     marginBottom: 35 * heightScale,
+    width: '80%',
   },
   selectedMoodButton: {
     backgroundColor: '#BC9680',
@@ -150,7 +162,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#4F3422',
     paddingHorizontal: 20 * widthScale,
-    marginBottom: 10 * heightScale,
+    marginBottom: 40 * heightScale,
   },
   textInput: {
     backgroundColor: 'white',
@@ -159,7 +171,7 @@ const styles = StyleSheet.create({
     paddingTop: 15 * heightScale,
     paddingBottom: 15 * heightScale,
     marginHorizontal: 20 * widthScale,
-    marginBottom: 25 * heightScale,
+    marginBottom: 65 * heightScale,
     fontSize: 16 * widthScale,
     color: '#5D4037',
     height: 100 * heightScale,
@@ -175,8 +187,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   nextButtonImage: {
-    width: 40 * widthScale, // Adjust size as needed
-    height: 40 * heightScale, // Adjust size as needed
+    width: 60 * widthScale, // Adjust size as needed
+    height:60 * heightScale, // Adjust size as needed
+    bottom: 20 * heightScale,
   },
 });
 
