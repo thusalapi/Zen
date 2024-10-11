@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation
 import {
   useFonts,
   Sora_400Regular,
@@ -15,6 +16,22 @@ import {
   Sora_700Bold,
 } from "@expo-google-fonts/sora";
 import AppLoading from "expo-app-loading";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
+
+type RootStackParamList = {
+  SelfAssessmentHome: undefined;
+  Question1: undefined;
+  Question2: undefined;
+  Question3: undefined;
+  Question4: undefined;
+  Question5: undefined;
+};
+
+type SelfAssessmentHomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "SelfAssessmentHome"
+>;
 
 interface ExerciseProps {
   title: string;
@@ -37,6 +54,8 @@ const ExerciseCard: React.FC<ExerciseProps> = ({
 );
 
 const SelfAssessmentHome: React.FC = () => {
+  const navigation = useNavigation<SelfAssessmentHomeScreenNavigationProp>();
+
   let [fontsLoaded] = useFonts({
     Sora_400Regular,
     Sora_600SemiBold,
@@ -46,6 +65,10 @@ const SelfAssessmentHome: React.FC = () => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
+  const handleNavigateToQuestion1 = () => {
+    navigation.navigate("Question1");
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -58,12 +81,15 @@ const SelfAssessmentHome: React.FC = () => {
             </Text>
           </View>
           <Image
-            source={require("../assets/images/header.png")}
+            source={require("../../assets/images/header.png")}
             style={styles.brainImage}
           />
         </View>
 
-        <TouchableOpacity style={styles.assessmentButton}>
+        <TouchableOpacity
+          style={styles.assessmentButton}
+          onPress={handleNavigateToQuestion1}
+        >
           <Text style={styles.assessmentButtonText}>
             Take a Self-Assessment
           </Text>
@@ -74,22 +100,22 @@ const SelfAssessmentHome: React.FC = () => {
         <ExerciseCard
           title="Deep Breathing"
           duration="(20 minutes)"
-          imageSource={require("../assets/images/exercise1.png")}
+          imageSource={require("../../assets/images/exercise1.png")}
         />
         <ExerciseCard
           title="Visualization"
           duration="(20 minutes)"
-          imageSource={require("../assets/images/exercise2.png")}
+          imageSource={require("../../assets/images/exercise2.png")}
         />
         <ExerciseCard
           title="Mindful Walk"
           duration="(20 minutes)"
-          imageSource={require("../assets/images/exercise3.png")}
+          imageSource={require("../../assets/images/exercise3.png")}
         />
         <ExerciseCard
           title="Gratitude Pause"
           duration="(20 minutes)"
-          imageSource={require("../assets/images/exercise4.png")}
+          imageSource={require("../../assets/images/exercise4.png")}
         />
       </ScrollView>
     </SafeAreaView>
@@ -128,8 +154,8 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   brainImage: {
-    width: 180,
-    height: 180,
+    width: 160,
+    height: 160,
     resizeMode: "contain",
   },
   assessmentButton: {
