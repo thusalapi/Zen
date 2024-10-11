@@ -5,14 +5,32 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  ScrollView,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import {
   useFonts,
   Sora_400Regular,
   Sora_700Bold,
 } from "@expo-google-fonts/sora";
 import AppLoading from "expo-app-loading";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type RootStackParamList = {
+  Question1: undefined;
+  Question2: undefined;
+  Question3: undefined;
+  Question4: undefined;
+  Question5: undefined;
+};
+
+type Question2NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Question2"
+>;
+
+type Props = {
+  navigation: Question2NavigationProp;
+};
 
 type Option = {
   id: number;
@@ -26,7 +44,7 @@ const options: Option[] = [
   { id: 4, text: "Struggling often" },
 ];
 
-const Question2: React.FC = () => {
+const Question2: React.FC<Props> = ({ navigation }) => {
   const [selectedOption, setSelectedOption] = useState<number>(2);
 
   let [fontsLoaded] = useFonts({
@@ -38,56 +56,72 @@ const Question2: React.FC = () => {
     return <AppLoading />;
   }
 
+  const handleNextPress = () => {
+    navigation.navigate("Question3");
+  };
+
+  const handleBackPress = () => {
+    navigation.navigate("Question1");
+  };
+
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/images/bg1.png")}
-        style={styles.imageBackground}
-        resizeMode="contain"
-      ></ImageBackground>
-      <View style={styles.content}>
-        <View style={styles.progressContainer}>
-          {[1, 2, 3, 4, 5].map((num) => (
-            <View
-              key={num}
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../../assets/images/bg1.png")}
+          style={styles.imageBackground}
+          resizeMode="contain"
+        ></ImageBackground>
+        <View style={styles.content}>
+          <View style={styles.progressContainer}>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <View
+                key={num}
+                style={[
+                  styles.progressCircle,
+                  num === 2 && styles.activeProgressCircle,
+                  num < 2 && styles.completedProgressCircle,
+                ]}
+              >
+                {num === 2 && <Text style={styles.progressNumber}>2</Text>}
+              </View>
+            ))}
+          </View>
+
+          <Text style={styles.question}>
+            How well are you managing your daily responsibilities?
+          </Text>
+
+          {options.map((option) => (
+            <TouchableOpacity
+              key={option.id}
               style={[
-                styles.progressCircle,
-                num === 2 && styles.activeProgressCircle,
-                num === 1 && styles.completedProgressCircle,
+                styles.optionButton,
+                selectedOption === option.id && styles.selectedOption,
               ]}
+              onPress={() => setSelectedOption(option.id)}
             >
-              {num === 2 && <Text style={styles.progressNumber}>2</Text>}
-            </View>
+              <Text style={styles.optionText}>{option.text}</Text>
+            </TouchableOpacity>
           ))}
-        </View>
 
-        <Text style={styles.question}>
-          How well are you managing your daily responsibilities?
-        </Text>
-
-        {options.map((option) => (
-          <TouchableOpacity
-            key={option.id}
-            style={[
-              styles.optionButton,
-              selectedOption === option.id && styles.selectedOption,
-            ]}
-            onPress={() => setSelectedOption(option.id)}
-          >
-            <Text style={styles.optionText}>{option.text}</Text>
-          </TouchableOpacity>
-        ))}
-
-        <View style={styles.navigationContainer}>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>Next</Text>
-          </TouchableOpacity>
+          <View style={styles.navigationContainer}>
+            <TouchableOpacity
+              style={styles.navButton}
+              onPress={handleBackPress}
+            >
+              <Text style={styles.navButtonText}>Back</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.navButton}
+              onPress={handleNextPress}
+            >
+              <Text style={styles.navButtonText}>Next</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
