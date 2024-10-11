@@ -105,7 +105,16 @@ export default function TabLayout() {
           options={{
             headerShown: false,
             title: "Habit",
+            tabBarIcon: ({ color }) => (
+              <Feather name="plus" size={24} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="selfAssessment"
+          options={{
             headerShown: false,
+            title: "Self Assessment",
             tabBarIcon: ({ color }) => (
               <Feather name="plus" size={24} color={color} />
             ),
