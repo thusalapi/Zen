@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     marginRight: 8,
-    lineHeight: 32,
+    lineHeight: 48,
+    paddingBottom: 16,
   },
   activeButton: {
     backgroundColor: "#8B4513",

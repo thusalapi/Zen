@@ -6,7 +6,7 @@ import { useDoctors } from "../hooks/useDoctors";
 import FilterButton from "@/components/professional/FilterButton";
 import DoctorList from "@/components/professional/DoctorsList";
 
-const filterOptions = ["All", "Exp", "Rating", "Price"];
+const filterOptions = ["All", "Exp", "Rating", "Price", "Specialty"];
 
 export default function AllDoctors() {
   const [activeFilter, setActiveFilter] = useState("All");
