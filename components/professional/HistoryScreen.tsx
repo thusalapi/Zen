@@ -90,7 +90,7 @@ const HistoryScreen: React.FC<HistoryScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E6E0FF",
+    backgroundColor: "#F7F4F2",
     padding: 20,
   },
   header: {

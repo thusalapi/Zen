@@ -71,8 +71,12 @@ export default function DoctorDetails() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Contact Information</Text>
           <View style={styles.contactInfo}>
-            <Text>• Phone: {doctor.phone}</Text>
-            <Text>• Email: {doctor.email}</Text>
+            <Text style={styles.subSectionContent}>
+              • Phone: {doctor.phone}
+            </Text>
+            <Text style={styles.subSectionContent}>
+              • Email: {doctor.email}
+            </Text>
           </View>
         </View>
 
@@ -80,7 +84,9 @@ export default function DoctorDetails() {
           <Text style={styles.sectionTitle}>Availability</Text>
           <View style={styles.availability}>
             {doctor.availability.map((time, index) => (
-              <Text key={index}>• {time}</Text>
+              <Text style={styles.subSectionContent} key={index}>
+                • {time}
+              </Text>
             ))}
           </View>
         </View>
@@ -163,6 +169,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
   },
+  subSectionContent: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 8,
+  },
   contactInfo: {
     backgroundColor: "#FFFF",
     borderRadius: 8,
@@ -184,5 +195,8 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  contentInfo: {
+    marginBottom: 8,
   },
 });
