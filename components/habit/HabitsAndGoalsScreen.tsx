@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   Modal,
   Image,
+  RefreshControl,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import axios from "axios";
@@ -28,23 +29,30 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
   //   { id: 2, name: "Be healthy", duration: "2 month" },
   // ];
 
+  const [refreshing, setRefreshing] = useState(false); // Add refreshing state
+
+  const fetchHabits = async () => {
+    try {
+      const response = await axios.get(
+        "http://192.168.254.187:3000/api/habits/6707bed530b32fa9c8952e00"
+      ); // Replace with your backend URL
+      setHabits(response.data); // Assuming data contains an array of habits
+    } catch (error) {
+      console.error("Error fetching habits:", error);
+    }
+  };
+
   // Fetch habits from backend
   useEffect(() => {
-    const fetchHabits = async () => {
-      try {
-        const response = await axios.get(
-          "http://192.168.93.187:3000/api/habits/6707bed530b32fa9c8952e00"
-        ); // Replace with your backend URL
-        setHabits(response.data); // Assuming data contains an array of habits
-      } catch (error) {
-        console.error("Error fetching habits:", error);
-      }
-    };
-
     fetchHabits();
   }, []);
 
-  console.log(habits);
+  // Function to handle pull-to-refresh
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchHabits();
+    setRefreshing(false);
+  };
 
   const goals = [
     { id: 1, name: "Study Art", duration: "6 days", color: "#A8D8D8" },
@@ -87,7 +95,6 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
       </View>
     </View>
   );
-
 
   const renderGoalItem = (goal: any) => (
     <View style={[styles.goalItem, { backgroundColor: goal.color }]}>
@@ -141,7 +148,12 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        style={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View style={styles.header}>
           <View style={styles.headerText}>
             <Text style={styles.title}>Build Better Habits</Text>
