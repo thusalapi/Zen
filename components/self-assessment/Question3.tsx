@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     width: "100%",
-    height: "59.6%",
+    height: "60.2%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 15,
+    marginTop: 10,
   },
   navButton: {
     padding: 10,
