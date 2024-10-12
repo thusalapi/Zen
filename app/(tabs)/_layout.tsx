@@ -21,12 +21,24 @@ export default function TabLayout() {
           options={{
             tabBarLabel: "",
             headerShown: false,
+            tabBarButton: () => null,
+            tabBarIcon: ({ color }) => (
+              <Feather name="home" size={24} color={color} />
+            ),
+            tabBarStyle: { display: "none" },
+          }}
+        />
+        <Tabs.Screen
+          name="assement"
+          options={{
+            tabBarLabel: "",
+            headerShown: false,
             tabBarIcon: ({ color }) => (
               <Feather name="home" size={24} color={color} />
             ),
           }}
         />
-                <Tabs.Screen
+        <Tabs.Screen
           name="mood"
           options={{
             headerShown: false,
@@ -58,7 +70,6 @@ export default function TabLayout() {
             ),
           }}
         />
-
       </Tabs>
     </>
   );
