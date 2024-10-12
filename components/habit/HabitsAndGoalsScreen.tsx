@@ -34,7 +34,7 @@ const HabitsAndGoalsScreen = ({ navigation }: { navigation: any }) => {
   const fetchHabits = async () => {
     try {
       const response = await axios.get(
-        "http://192.168.254.187:3000/api/habits/6707bed530b32fa9c8952e00"
+        "http://192.168.29.188:3000/api/habits/6707bed530b32fa9c8952e00"
       ); // Replace with your backend URL
       setHabits(response.data); // Assuming data contains an array of habits
     } catch (error) {

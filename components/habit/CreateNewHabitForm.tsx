@@ -100,7 +100,7 @@ const CreateNewHabitForm = ({ navigation }: { navigation: NavigationProp<any> })
 
     try {
       const response = await axios.post(
-        "http://192.168.254.187:3000/api/habits",
+        "http://192.168.29.188:3000/api/habits",
         formData
       );
       console.log(response.data);
