@@ -83,14 +83,14 @@ const SigninForm: React.FC<SigninFormProps> = ({ onNavigateBack }) => {
 
         <TouchableOpacity
           style={styles.signinButton}
-          onPress={() => router.push("/(tabs)/")}
+          onPress={() => router.push("/(tabs)/assement")}
         >
           <Text style={styles.signinButtonText}>Log in</Text>
         </TouchableOpacity>
 
         <View style={styles.signupContainer}>
           <Text style={styles.signupText}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => router.push("/(tabs)/doctors")}>
+          <TouchableOpacity onPress={() => router.push("/(tabs)/")}>
             <Text style={styles.signupLink}>Sign up</Text>
           </TouchableOpacity>
         </View>
