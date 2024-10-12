@@ -59,12 +59,12 @@ const Question4: React.FC<Props> = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.container}>
+        <ImageBackground
+          source={require("../../assets/images/bg1.png")}
+          style={styles.imageBackground}
+          resizeMode="contain"
+        />
         <View style={styles.content}>
-          <ImageBackground
-            source={require("../../assets/images/bg1.png")}
-            style={styles.imageBackground}
-            resizeMode="contain"
-          />
           <View style={styles.progressContainer}>
             {[1, 2, 3, 4, 5].map((num) => (
               <View
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     width: "100%",
-    height: "65%",
+    height: "66.2%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 45,
+    marginTop: 30,
   },
   navButton: {
     padding: 10,
