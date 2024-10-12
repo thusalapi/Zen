@@ -6,7 +6,7 @@ import SigninForm from "@/components/SignInForm";
 export default function SigninScreen() {
   return (
     <View style={styles.container}>
-      <SigninForm onNavigateBack={() => router.back()} />
+      <SigninForm />
     </View>
   );
 }
@@ -14,7 +14,7 @@ export default function SigninScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E6E0FF",
+    backgroundColor: "#F7F4F2",
     padding: 20,
   },
 });
