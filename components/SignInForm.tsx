@@ -14,7 +14,7 @@ import { Feather } from "@expo/vector-icons";
 import { router } from "expo-router";
 
 interface SigninFormProps {
-  onNavigateBack: () => void;
+  onNavigateBack?: () => void;
 }
 
 const SigninForm: React.FC<SigninFormProps> = ({ onNavigateBack }) => {
@@ -45,9 +45,9 @@ const SigninForm: React.FC<SigninFormProps> = ({ onNavigateBack }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={onNavigateBack}>
+      {/* <TouchableOpacity style={styles.backButton} onPress={onNavigateBack}>
         <Feather name="arrow-left" size={24} color="black" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <Text style={styles.title}>Login</Text>
 
@@ -81,13 +81,16 @@ const SigninForm: React.FC<SigninFormProps> = ({ onNavigateBack }) => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.signinButton} onPress={handleSignin}>
+        <TouchableOpacity
+          style={styles.signinButton}
+          onPress={() => router.push("/(tabs)/")}
+        >
           <Text style={styles.signinButtonText}>Log in</Text>
         </TouchableOpacity>
 
         <View style={styles.signupContainer}>
           <Text style={styles.signupText}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => router.push("/signup")}>
+          <TouchableOpacity onPress={() => router.push("/(tabs)/doctors")}>
             <Text style={styles.signupLink}>Sign up</Text>
           </TouchableOpacity>
         </View>
@@ -126,7 +129,7 @@ const SigninForm: React.FC<SigninFormProps> = ({ onNavigateBack }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E6E0FF",
+    backgroundColor: "#F7F4F2",
     padding: 20,
   },
   backButton: {
@@ -164,7 +167,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   signinButton: {
-    backgroundColor: "#6C5CE7",
+    backgroundColor: "#D2B48C",
     borderRadius: 10,
     padding: 15,
     alignItems: "center",
