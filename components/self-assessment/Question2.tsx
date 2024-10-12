@@ -71,7 +71,7 @@ const Question2: React.FC<Props> = ({ navigation }) => {
           source={require("../../assets/images/bg1.png")}
           style={styles.imageBackground}
           resizeMode="contain"
-        ></ImageBackground>
+        />
         <View style={styles.content}>
           <View style={styles.progressContainer}>
             {[1, 2, 3, 4, 5].map((num) => (
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 60,
+    marginTop: 45,
   },
   navButton: {
     padding: 10,

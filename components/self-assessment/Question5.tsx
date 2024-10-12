@@ -68,7 +68,7 @@ const Question5: React.FC = () => {
           source={require("../../assets/images/bg2.png")}
           style={styles.imageBackground}
           resizeMode="contain"
-        ></ImageBackground>
+        />
         <View style={styles.progressContainer}>
           {[1, 2, 3, 4, 5].map((num) => (
             <View
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 30,
+    marginTop: 15,
   },
   navButton: {
     padding: 10,
